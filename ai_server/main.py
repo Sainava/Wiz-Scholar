@@ -21,7 +21,7 @@ app = FastAPI(
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],  # React dev servers
+    allow_origins=["http://localhost:3000", "http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -44,7 +44,6 @@ class QueryResponse(BaseModel):
 
 @app.get("/", response_model=dict)
 async def root():
-    """Root endpoint"""
     return {
         "message": "Wiz-Scholar AI Server is running!",
         "docs": "/docs",
@@ -53,9 +52,7 @@ async def root():
 
 @app.get("/health", response_model=HealthResponse)
 async def health_check():
-    """Health check endpoint"""
     try:
-        # You can add more comprehensive health checks here
         ai_status = "ready"
         if not os.getenv("OPENAI_API_KEY"):
             ai_status = "no_api_key"
@@ -71,10 +68,7 @@ async def health_check():
 
 @app.post("/api/query", response_model=QueryResponse)
 async def process_query(request: QueryRequest):
-    """Process AI queries - placeholder for now"""
     try:
-        # This is a placeholder response
-        # You'll implement actual AI logic here later
         response = f"AI processed your query: '{request.query}'"
         
         return QueryResponse(
@@ -88,7 +82,6 @@ async def process_query(request: QueryRequest):
 
 @app.get("/api/models")
 async def list_models():
-    """List available AI models"""
     return {
         "models": [
             {"id": "placeholder", "name": "Placeholder Model", "status": "available"}
@@ -97,4 +90,4 @@ async def list_models():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
