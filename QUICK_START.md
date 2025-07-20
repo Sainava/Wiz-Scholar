@@ -1,53 +1,112 @@
-# 🚀 QUICK START - Your Next Steps
+# 🚀 Wiz-Scholar Quick Start Guide
 
-## ✅ **Current Status: Day 1 Complete!**
-Your MERN + AI stack is running:
-- React: http://localhost:5173
-- Express: http://localhost:5001
-- FastAPI: http://localhost:8001
+> **Goal**: Get your complete MERN+AI stack running in under 10 minutes
 
-## 🎯 **IMMEDIATE TODO (15 minutes)**
+## ⚡ Super Fast Setup (For Experienced Developers)
 
-### **Priority 1: Set Up MongoDB Atlas**
-**Why**: Your backend currently runs without a database. MongoDB is essential for storing users, courses, and progress.
-
-1. **Go to**: [MongoDB Atlas](https://www.mongodb.com/atlas/database)
-2. **Follow**: Complete step-by-step guide in `MONGODB_SETUP.md`
-3. **Result**: Your server will show "MongoDB connected successfully"
-
-### **Priority 2: Test Database Connection**
 ```bash
-# After MongoDB setup, test your connection:
-curl http://localhost:5001/api/health
-# Should show database: "connected"
+# 1. Clone and install
+git clone <your-repo-url> && cd Wiz-Scholar
+npm run install:all && npm run setup:ai
+
+# 2. Set up MongoDB Atlas (get connection string from MongoDB Atlas)
+echo "MONGODB_URI=your_connection_string_here" > server/.env
+echo "PORT=5001" >> server/.env
+echo "NODE_ENV=development" >> server/.env
+
+# 3. Start everything
+npm run dev
 ```
 
-## 🛠️ **TODAY'S DEVELOPMENT TASKS (1-2 hours)**
+**That's it!** Check http://localhost:5173
 
-### **Task 1: Create Your First User Model** (20 minutes)
+## 📋 Detailed Step-by-Step Guide
+
+### **Step 1: Prerequisites Check**
+Make sure you have these installed:
+- [ ] **Node.js v16+** → `node --version` (should show v16 or higher)
+- [ ] **Python 3.8+** → `python3 --version` 
+- [ ] **Git** → `git --version`
+
+If missing any, download from:
+- Node.js: https://nodejs.org/
+- Python: https://python.org/
+- Git: https://git-scm.com/
+
+### **Step 2: Clone & Install**
 ```bash
-# 1. Create models directory
-mkdir server/models
+# Clone the repository
+git clone <your-repo-url>
+cd Wiz-Scholar
 
-# 2. Follow MONGODB_SETUP.md Step 7 to create User.js
-# 3. Test with: curl http://localhost:5001/api/test-db
+# Install ALL dependencies (React + Express + Python AI)
+npm run install:all
+```
+*This takes 2-3 minutes and installs everything you need.*
+
+### **Step 3: Set Up Python AI Environment**
+```bash
+# Create virtual environment and install AI packages
+npm run setup:ai
+```
+*This creates a Python virtual environment with FastAPI, scikit-learn, etc.*
+
+### **Step 4: Configure MongoDB Atlas**
+
+#### Option A: Quick Setup (Recommended)
+1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas) and create free account
+2. Create a new cluster (free tier)
+3. Get connection string (replace `<password>` with your password)
+4. Create `server/.env` file:
+
+```bash
+# Create the environment file
+cat > server/.env << EOF
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/wiz-scholar?retryWrites=true&w=majority
+PORT=5001
+NODE_ENV=development
+EOF
 ```
 
-### **Task 2: Build User Registration API** (30 minutes)
-```bash
-# 1. Create routes directory  
-mkdir server/routes
+#### Option B: Detailed Setup
+Follow **[MONGODB_SETUP.md](./MONGODB_SETUP.md)** for complete instructions.
 
-# 2. Follow MONGODB_SETUP.md Step 9 for user routes
-# 3. Test registration with curl command in the guide
+### **Step 5: Optional - Set Up OpenAI (for AI features)**
+```bash
+# Create AI environment file (optional)
+cat > ai_server/.env << EOF
+OPENAI_API_KEY=your_openai_api_key_here
+AI_MODEL=gpt-3.5-turbo
+HOST=0.0.0.0
+PORT=8001
+DEBUG=True
+EOF
+```
+*Skip this if you don't have an OpenAI API key - AI server will still work with placeholder responses.*
+
+### **Step 6: Start All Services**
+```bash
+# Run everything at once (recommended)
+npm run dev
 ```
 
-### **Task 3: Create Basic Frontend Form** (30 minutes)
-- Edit `client/src/App.jsx`
-- Add a simple registration form
-- Connect to your API endpoint
+You should see:
+```
+[0] React frontend starting on http://localhost:5173
+[1] Express server starting on http://localhost:5001  
+[2] FastAPI AI server starting on http://localhost:8001
+```
 
-## 🎯 **END OF DAY 2 GOALS**
+## ✅ Verification Checklist
+
+Test these URLs to make sure everything works:
+
+- [ ] **React App**: http://localhost:5173 → Should show Vite + React page
+- [ ] **Express API**: http://localhost:5001 → Should show `{"message":"Wiz-Scholar Server is running!"}`
+- [ ] **Express Health**: http://localhost:5001/api/health → Should show database status
+- [ ] **AI Server**: http://localhost:8001 → Should show AI server message
+- [ ] **AI Health**: http://localhost:8001/health → Should show AI status
+- [ ] **AI Docs**: http://localhost:8001/docs → Should show interactive API documentation
 
 By end of today, you should have:
 - [ ] MongoDB Atlas connected
