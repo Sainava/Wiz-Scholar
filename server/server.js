@@ -14,8 +14,11 @@ app.use(express.json());
 const connectDB = async () => {
   try {
     if (process.env.MONGODB_URI && process.env.MONGODB_URI !== 'your_mongodb_connection_string_here') {
+      console.log('🔄 Attempting to connect to MongoDB...');
+      console.log('📍 Connection string (masked):', process.env.MONGODB_URI.replace(/:[^:@]*@/, ':****@'));
+      
       await mongoose.connect(process.env.MONGODB_URI);
-      console.log('MongoDB connected successfully');
+      console.log('✅ MongoDB connected successfully');
       return true;
     } else {
       console.log('⚠️  MongoDB URI not configured. Running without database connection.');
@@ -23,7 +26,7 @@ const connectDB = async () => {
       return false;
     }
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    console.error('❌ MongoDB connection error:', error.message);
     console.log('⚠️  Continuing without database connection');
     return false;
   }
