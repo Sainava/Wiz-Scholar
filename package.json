@@ -109,6 +109,13 @@
     "concurrently": "^9.2.0"
   },
   "scripts": {
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "setup:ai": "cd ai_server && python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt",
+    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\" \"npm run ai:dev\"",
+    "client:dev": "cd client && npm run dev",
+    "server:dev": "cd server && npm run dev",
+    "ai:dev": "cd ai_server && . venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8001 --reload",
+    "client:build": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
