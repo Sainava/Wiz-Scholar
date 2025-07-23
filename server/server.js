@@ -1,7 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const upload = require('./middlewares/multer.middleware');
+const { 
+  uploadPDFToCloudinary, 
+  extractTextFromPDF, 
+  summarizeWithGemini,
+  askQuestionFromPDF 
+} = require('./utils/pdfProcessor');
+const Document = require('./models/document.model');
+const pdfRoutes = require('./routes/pdf');
+const { initializeCloudinary } = require('./utils/cloudinary');
 require('dotenv').config();
+
+// Initialize Cloudinary after environment variables are loaded
+initializeCloudinary();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -33,6 +46,8 @@ const connectDB = async () => {
 };
 
 // Routes
+app.use('/api', pdfRoutes);
+
 app.get('/', (req, res) => {
   res.json({ message: 'Wiz-Scholar Server is running!' });
 });
@@ -45,6 +60,254 @@ app.get('/api/health', (req, res) => {
     database: mongoStatus,
     timestamp: new Date().toISOString()
   });
+});
+
+// PDF Summarizer proxy routes to FastAPI
+app.post('/api/summarize', async (req, res) => {
+  try {
+    const response = await fetch('http://localhost:8001/api/summarize', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(req.body)
+    });
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ 
+      error: 'Failed to process summarization request',
+      message: error.message 
+    });
+  }
+});
+
+app.post('/api/question-answer', async (req, res) => {
+  try {
+    const response = await fetch('http://localhost:8001/api/question-answer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(req.body)
+    });
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ 
+      error: 'Failed to process Q&A request',
+      message: error.message 
+    });
+  }
+});
+
+// PDF Upload, Cloudinary Storage, and Summarization
+app.post('/api/upload-pdf', upload.single('pdf'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ 
+        error: 'No PDF file uploaded',
+        message: 'Please select a PDF file to upload'
+      });
+    }
+
+    const { summaryType = 'academic' } = req.body;
+
+    // Step 1: Upload PDF to Cloudinary
+    console.log('📤 Uploading PDF to Cloudinary...');
+    const cloudinaryResult = await uploadPDFToCloudinary(req.file.buffer, req.file.originalname);
+    
+    // Step 2: Extract text from PDF
+    console.log('📄 Extracting text from PDF...');
+    const extractedText = await extractTextFromPDF(req.file.buffer);
+    
+    if (!extractedText.trim()) {
+      return res.status(400).json({
+        error: 'No readable text found in PDF',
+        message: 'The PDF appears to be empty or contains only images'
+      });
+    }
+
+    // Step 3: Save document metadata to database (if connected)
+    let documentRecord = null;
+    if (mongoose.connection.readyState === 1) {
+      try {
+        documentRecord = new Document({
+          title: req.file.originalname.replace('.pdf', ''),
+          originalFileName: req.file.originalname,
+          cloudinaryUrl: cloudinaryResult.secure_url,
+          cloudinaryPublicId: cloudinaryResult.public_id,
+          fileSize: req.file.size,
+          extractedText: extractedText,
+          textLength: extractedText.length,
+          uploadedAt: new Date()
+        });
+        
+        await documentRecord.save();
+        console.log('💾 Document metadata saved to database');
+      } catch (dbError) {
+        console.warn('⚠️ Database save failed, continuing without it:', dbError.message);
+      }
+    }
+
+    // Step 4: Summarize with Gemini 2.5 Pro
+    console.log('🤖 Summarizing with Gemini 2.5 Pro...');
+    const summaryResult = await summarizeWithGemini(extractedText, summaryType);
+
+    // Step 5: Update summary count in database
+    if (documentRecord) {
+      try {
+        documentRecord.summaryCount += 1;
+        documentRecord.lastSummarized = new Date();
+        await documentRecord.save();
+      } catch (dbError) {
+        console.warn('⚠️ Database update failed:', dbError.message);
+      }
+    }
+
+    // Step 6: Return complete response
+    res.json({
+      success: true,
+      message: 'PDF processed successfully',
+      data: {
+        document: {
+          id: documentRecord?._id,
+          filename: req.file.originalname,
+          cloudinaryUrl: cloudinaryResult.secure_url,
+          fileSize: req.file.size,
+          textLength: extractedText.length
+        },
+        summary: summaryResult,
+        extractedText: extractedText.substring(0, 500) + '...' // First 500 chars for preview
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ PDF processing error:', error);
+    res.status(500).json({ 
+      error: 'PDF processing failed',
+      message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
+});
+
+// Question-Answer endpoint for uploaded PDFs
+app.post('/api/ask-question', async (req, res) => {
+  try {
+    const { documentId, question, answerStyle = 'concise' } = req.body;
+
+    if (!question?.trim()) {
+      return res.status(400).json({
+        error: 'Question is required',
+        message: 'Please provide a question to ask about the document'
+      });
+    }
+
+    let context = '';
+
+    // If documentId provided, get text from database
+    if (documentId && mongoose.connection.readyState === 1) {
+      try {
+        const document = await Document.findById(documentId);
+        if (document) {
+          context = document.extractedText;
+          // Update question count
+          document.questionCount += 1;
+          await document.save();
+        } else {
+          return res.status(404).json({
+            error: 'Document not found',
+            message: 'The specified document could not be found'
+          });
+        }
+      } catch (dbError) {
+        return res.status(500).json({
+          error: 'Database error',
+          message: 'Failed to retrieve document from database'
+        });
+      }
+    } else if (req.body.context) {
+      // Use provided context if no documentId
+      context = req.body.context;
+    } else {
+      return res.status(400).json({
+        error: 'Context required',
+        message: 'Either provide a documentId or context text'
+      });
+    }
+
+    // Ask question using Gemini
+    console.log('❓ Processing question with Gemini 2.5 Pro...');
+    const answerResult = await askQuestionFromPDF(context, question, answerStyle);
+
+    res.json({
+      success: true,
+      data: answerResult
+    });
+
+  } catch (error) {
+    console.error('❌ Question processing error:', error);
+    res.status(500).json({ 
+      error: 'Question processing failed',
+      message: error.message
+    });
+  }
+});
+
+// Get list of uploaded documents
+app.get('/api/documents', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        error: 'Database not connected',
+        message: 'Cannot retrieve documents without database connection'
+      });
+    }
+
+    const documents = await Document.find()
+      .select('-extractedText') // Exclude large text field
+      .sort({ uploadedAt: -1 })
+      .limit(50);
+
+    res.json({
+      success: true,
+      data: documents,
+      count: documents.length
+    });
+
+  } catch (error) {
+    console.error('❌ Documents retrieval error:', error);
+    res.status(500).json({ 
+      error: 'Failed to retrieve documents',
+      message: error.message
+    });
+  }
+});
+
+// PDF Upload and Summarization proxy
+app.post('/api/summarize-pdf', async (req, res) => {
+  try {
+    // For file uploads, we need to use FormData
+    const formData = new FormData();
+    
+    // If using multer or similar, you'd handle file upload here
+    // For now, we'll proxy the multipart form data directly
+    const response = await fetch('http://localhost:8001/api/summarize-pdf', {
+      method: 'POST',
+      body: req.body  // This should contain the FormData
+    });
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ 
+      error: 'Failed to process PDF summarization request',
+      message: error.message 
+    });
+  }
 });
 
 // Start server (with or without database)

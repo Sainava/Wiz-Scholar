@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        
+        .test-section h3 {
+            color: #555;
+            margin-top: 0;
+        }
+        
+        .file-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .file-input:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 12px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .loading {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        #healthStatus {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .health-ok {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .health-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Wiz-Scholar PDF Summarizer Test</h1>
+        
+        <div id="healthStatus">Checking server status...</div>
+        
+        <!-- Text Summarization Test -->
+        <div class="test-section">
+            <h3>📝 Test Text Summarization</h3>
+            <label for="textInput">Enter text to summarize:</label>
+            <textarea id="textInput" rows="6" placeholder="Paste your text here...">Artificial Intelligence (AI) is a branch of computer science that aims to create intelligent machines that work and react like humans. Some of the activities computers with artificial intelligence are designed for include: speech recognition, learning, planning, and problem solving. AI has been around since the 1950s, when it was first defined by John McCarthy as the science and engineering of making intelligent machines. The field of AI research was founded on the claim that human intelligence can be so precisely described that a machine can be made to simulate it.</textarea>
+            
+            <label for="summaryType">Summary Type:</label>
+            <select id="summaryType">
+                <option value="academic">Academic</option>
+                <option value="brief">Brief</option>
+                <option value="detailed">Detailed</option>
+                <option value="bullet_points">Bullet Points</option>
+            </select>
+            
+            <button onclick="summarizeText()">📄 Summarize Text</button>
+            <div id="textResult"></div>
+        </div>
+        
+        <!-- PDF Upload Test -->
+        <div class="test-section">
+            <h3>📎 Test PDF Upload & Summarization</h3>
+            <div class="file-input" onclick="document.getElementById('pdfFile').click()">
+                <p>📁 Click to select a PDF file or drag & drop here</p>
+                <p style="font-size: 12px; color: #666;">Max file size: 10MB</p>
+            </div>
+            <input type="file" id="pdfFile" accept=".pdf" onchange="displayFileName()">
+            
+            <label for="pdfSummaryType">Summary Type:</label>
+            <select id="pdfSummaryType">
+                <option value="academic">Academic</option>
+                <option value="brief">Brief</option>
+                <option value="detailed">Detailed</option>
+                <option value="bullet_points">Bullet Points</option>
+            </select>
+            
+            <button onclick="uploadAndSummarizePDF()" id="pdfButton">📄 Upload & Summarize PDF</button>
+            <div id="pdfResult"></div>
+        </div>
+        
+        <!-- Question & Answer Test -->
+        <div class="test-section">
+            <h3>❓ Test Question & Answer</h3>
+            <label for="contextInput">Context (text or document content):</label>
+            <textarea id="contextInput" rows="4" placeholder="Provide context for the question...">Artificial Intelligence is a rapidly growing field that encompasses machine learning, natural language processing, computer vision, and robotics. Modern AI systems use neural networks and deep learning to process complex data patterns.</textarea>
+            
+            <label for="questionInput">Question:</label>
+            <textarea id="questionInput" rows="2" placeholder="What would you like to know about the context?">What is artificial intelligence and what are its main components?</textarea>
+            
+            <label for="answerStyle">Answer Style:</label>
+            <select id="answerStyle">
+                <option value="concise">Concise</option>
+                <option value="detailed">Detailed</option>
+                <option value="explanatory">Explanatory</option>
+            </select>
+            
+            <button onclick="askQuestion()">🤔 Ask Question</button>
+            <div id="qaResult"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8001';
+        
+        // Check server health on page load
+        window.onload = function() {
+            checkHealth();
+        };
+        
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                const statusDiv = document.getElementById('healthStatus');
+                if (response.ok) {
+                    statusDiv.className = 'health-ok';
+                    statusDiv.innerHTML = `✅ Server Status: ${data.status} | AI Status: ${data.ai_status} | Gemini Keys: ${data.gemini_keys}`;
+                } else {
+                    statusDiv.className = 'health-error';
+                    statusDiv.innerHTML = `❌ Server Error: ${data.message || 'Unknown error'}`;
+                }
+            } catch (error) {
+                const statusDiv = document.getElementById('healthStatus');
+                statusDiv.className = 'health-error';
+                statusDiv.innerHTML = `❌ Cannot connect to AI server. Make sure it's running on ${API_BASE}`;
+            }
+        }
+        
+        async function summarizeText() {
+            const text = document.getElementById('textInput').value.trim();
+            const summaryType = document.getElementById('summaryType').value;
+            const resultDiv = document.getElementById('textResult');
+            
+            if (!text) {
+                showResult(resultDiv, 'Please enter some text to summarize.', 'error');
+                return;
+            }
+            
+            showResult(resultDiv, 'Summarizing text...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/summarize`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        summary_type: summaryType
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showSummaryResult(resultDiv, data, 'success');
+                } else {
+                    showResult(resultDiv, `Error: ${data.detail || 'Summarization failed'}`, 'error');
+                }
+            } catch (error) {
+                showResult(resultDiv, `Network error: ${error.message}`, 'error');
+            }
+        }
+        
+        function displayFileName() {
+            const fileInput = document.getElementById('pdfFile');
+            const fileDiv = document.querySelector('.file-input p');
+            
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                fileDiv.textContent = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            }
+        }
+        
+        async function uploadAndSummarizePDF() {
+            const fileInput = document.getElementById('pdfFile');
+            const summaryType = document.getElementById('pdfSummaryType').value;
+            const resultDiv = document.getElementById('pdfResult');
+            const button = document.getElementById('pdfButton');
+            
+            if (!fileInput.files.length) {
+                showResult(resultDiv, 'Please select a PDF file.', 'error');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            if (file.size > 10 * 1024 * 1024) {
+                showResult(resultDiv, 'File too large. Maximum size is 10MB.', 'error');
+                return;
+            }
+            
+            button.disabled = true;
+            showResult(resultDiv, 'Uploading and processing PDF...', 'loading');
+            
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('summary_type', summaryType);
+                
+                const response = await fetch(`${API_BASE}/api/summarize-pdf`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showSummaryResult(resultDiv, data, 'success');
+                } else {
+                    showResult(resultDiv, `Error: ${data.detail || 'PDF processing failed'}`, 'error');
+                }
+            } catch (error) {
+                showResult(resultDiv, `Network error: ${error.message}`, 'error');
+            } finally {
+                button.disabled = false;
+            }
+        }
+        
+        async function askQuestion() {
+            const context = document.getElementById('contextInput').value.trim();
+            const question = document.getElementById('questionInput').value.trim();
+            const answerStyle = document.getElementById('answerStyle').value;
+            const resultDiv = document.getElementById('qaResult');
+            
+            if (!context || !question) {
+                showResult(resultDiv, 'Please provide both context and question.', 'error');
+                return;
+            }
+            
+            showResult(resultDiv, 'Processing question...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/question-answer`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        question: question,
+                        context: context,
+                        answer_style: answerStyle
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showQAResult(resultDiv, data, 'success');
+                } else {
+                    showResult(resultDiv, `Error: ${data.detail || 'Question processing failed'}`, 'error');
+                }
+            } catch (error) {
+                showResult(resultDiv, `Network error: ${error.message}`, 'error');
+            }
+        }
+        
+        function showResult(element, message, type) {
+            element.className = `result ${type}`;
+            element.textContent = message;
+        }
+        
+        function showSummaryResult(element, data, type) {
+            element.className = `result ${type}`;
+            element.innerHTML = `
+                <strong>📄 Summary (${data.summary_type}):</strong>
+                <div style="margin: 10px 0; padding: 15px; background: white; border-radius: 5px; border: 1px solid #ddd;">
+                    ${data.summary}
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${data.original_length.toLocaleString()}</div>
+                        <div class="stat-label">Original Characters</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${data.summary_length.toLocaleString()}</div>
+                        <div class="stat-label">Summary Characters</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${data.compression_ratio}%</div>
+                        <div class="stat-label">Compression Ratio</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${data.model_used}</div>
+                        <div class="stat-label">AI Model</div>
+                    </div>
+                </div>
+                
+                ${data.filename ? `<p><strong>File:</strong> ${data.filename}</p>` : ''}
+            `;
+        }
+        
+        function showQAResult(element, data, type) {
+            element.className = `result ${type}`;
+            element.innerHTML = `
+                <strong>❓ Question:</strong>
+                <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px; font-style: italic;">
+                    ${data.question}
+                </div>
+                
+                <strong>💡 Answer (${data.answer_style}):</strong>
+                <div style="margin: 10px 0; padding: 15px; background: white; border-radius: 5px; border: 1px solid #ddd;">
+                    ${data.answer}
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${data.context_length.toLocaleString()}</div>
+                        <div class="stat-label">Context Characters</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${data.model_used}</div>
+                        <div class="stat-label">AI Model</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Drag and drop functionality
+        const fileInput = document.querySelector('.file-input');
+        
+        fileInput.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileInput.style.borderColor = '#007bff';
+            fileInput.style.backgroundColor = '#f8f9fa';
+        });
+        
+        fileInput.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fileInput.style.borderColor = '#ddd';
+            fileInput.style.backgroundColor = '';
+        });
+        
+        fileInput.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileInput.style.borderColor = '#ddd';
+            fileInput.style.backgroundColor = '';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type === 'application/pdf') {
+                document.getElementById('pdfFile').files = files;
+                displayFileName();
+            }
+        });
+    </script>
+</body>
+</html>
