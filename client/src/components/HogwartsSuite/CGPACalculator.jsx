@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CrossIcon from '../../assets/cross.svg';
 
 const CGPACalculator = () => {
   const [subjects, setSubjects] = useState([
@@ -226,7 +227,7 @@ const CGPACalculator = () => {
               </span>
               {subjects.length > 1 && (
                 <button onClick={() => removeSubject(index)} className="remove-btn">
-                  ❌
+                  <img src={CrossIcon} alt="Remove" className="cross-icon" />
                 </button>
               )}
             </div>
@@ -254,7 +255,7 @@ const CGPACalculator = () => {
                 💾 Save Changes
               </button>
               <button onClick={cancelEditing} className="cancel-edit-btn">
-                ❌ Cancel
+                Cancel
               </button>
             </>
           ) : (
@@ -346,7 +347,7 @@ const CGPACalculator = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h3>📋 Semester {semesterResults[viewingSemester].semester} Details</h3>
-              <button onClick={closeViewModal} className="close-modal-btn">✕</button>
+              <button onClick={closeViewModal} className="close-modal-btn"><img src={CrossIcon} alt="Close" className="cross-icon" /></button>
             </div>
             
             <div className="modal-body">
@@ -367,7 +368,7 @@ const CGPACalculator = () => {
                 </div>
               </div>
 
-              <h4>📚 Subjects:</h4>
+              <h4>Subjects:</h4>
               <div className="subjects-list">
                 {semesterResults[viewingSemester].subjects.map((subject, index) => (
                   <div key={index} className="subject-item">
