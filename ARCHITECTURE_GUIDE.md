@@ -95,7 +95,8 @@ Client → Express → MongoDB (metadata)
 **Environment Configuration**:
 ```python
 GEMINI_API_KEY_1 = "Your_Primary_Key"
-GEMINI_API_KEY_2 = "Your_Backup_Key" 
+GEMINI_API_KEY_2 = "Your_Backup_Key"
+GEMINI_API_KEY_3 = "Your_Third_Key"
 PORT = 8001
 DEBUG = True
 ```
@@ -206,6 +207,7 @@ npm run dev
 ```properties
 GEMINI_API_KEY_1=your_primary_gemini_key
 GEMINI_API_KEY_2=your_backup_gemini_key
+GEMINI_API_KEY_3=your_third_gemini_key
 HOST=0.0.0.0
 PORT=8001
 DEBUG=True
