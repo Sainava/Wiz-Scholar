@@ -1,4 +1,4 @@
-/* Wiz Scholar App - Magical Harry Potter Theme */
+/* Wiz Scholar App - Clean Professional Magical Theme */
 * {
   margin: 0;
   padding: 0;
@@ -6,65 +6,101 @@
 }
 
 :root {
-  /* Magical Dark Theme - Deep night sky */
+  /* Clean Magical Theme - Professional spacing and colors */
   --background: hsl(220 30% 5%);
-  --foreground: hsl(45 100% 85%);
+  --background-secondary: hsl(220 25% 8%);
+  --foreground: hsl(45 100% 90%);
+  --foreground-muted: hsl(45 60% 70%);
 
-  /* Enchanted Cards - Mystical purple-blue */
-  --card: hsl(235 25% 8%);
-  --card-foreground: hsl(45 100% 90%);
+  /* Clean Cards - Elevated surfaces */
+  --card: hsl(235 25% 12%);
+  --card-elevated: hsl(235 25% 15%);
+  --card-foreground: hsl(45 100% 92%);
 
-  /* Primary - Hogwarts Gold */
-  --primary: hsl(45 100% 65%);
-  --primary-foreground: hsl(220 30% 5%);
-  --primary-glow: hsl(45 100% 75%);
+  /* Primary - Refined Hogwarts Gold */
+  --primary: hsl(45 95% 68%);
+  --primary-hover: hsl(45 95% 75%);
+  --primary-foreground: hsl(220 30% 8%);
 
-  /* Secondary - House Colors */
-  --secondary: hsl(235 60% 25%);
-  --secondary-foreground: hsl(45 100% 90%);
+  /* Secondary - Sophisticated Purple */
+  --secondary: hsl(270 50% 45%);
+  --secondary-hover: hsl(270 50% 55%);
+  --secondary-foreground: hsl(45 100% 95%);
 
-  /* Muted - Subtle magical tones */
-  --muted: hsl(235 20% 15%);
-  --muted-foreground: hsl(220 15% 65%);
+  /* Muted - Clean neutral tones */
+  --muted: hsl(235 15% 18%);
+  --muted-hover: hsl(235 15% 22%);
+  --muted-foreground: hsl(220 10% 65%);
 
-  /* Accent - Mystical Purple */
-  --accent: hsl(270 60% 45%);
-  --accent-foreground: hsl(45 100% 95%);
+  /* Accent - Mystical highlights */
+  --accent: hsl(270 60% 55%);
+  --accent-foreground: hsl(45 100% 98%);
 
-  /* Destructive - Warning red */
-  --destructive: hsl(0 75% 55%);
-  --destructive-foreground: hsl(45 100% 95%);
+  /* Status colors */
+  --success: hsl(120 60% 50%);
+  --warning: hsl(35 85% 60%);
+  --destructive: hsl(0 75% 60%);
 
-  /* Borders and inputs */
-  --border: hsl(235 25% 20%);
-  --input: hsl(235 25% 15%);
-  --ring: hsl(45 100% 65%);
+  /* Clean borders and surfaces */
+  --border: hsl(235 20% 25%);
+  --border-muted: hsl(235 15% 20%);
+  --input: hsl(235 25% 18%);
+  --ring: hsl(45 95% 68%);
 
-  /* Magical gradients */
-  --gradient-primary: linear-gradient(135deg, hsl(45 100% 65%), hsl(45 100% 75%));
-  --gradient-mystical: linear-gradient(135deg, hsl(235 60% 25%), hsl(270 60% 45%));
-  --gradient-hero: linear-gradient(180deg, hsl(220 30% 5%), hsl(235 25% 8%));
-  --gradient-card: linear-gradient(145deg, hsl(235 25% 8%), hsl(235 25% 12%));
+  /* Professional shadows */
+  --shadow-sm: 0 2px 8px hsl(220 30% 3% / 0.3);
+  --shadow-md: 0 4px 16px hsl(220 30% 3% / 0.4);
+  --shadow-lg: 0 8px 32px hsl(220 30% 3% / 0.5);
+  --shadow-xl: 0 16px 64px hsl(220 30% 3% / 0.6);
 
-  /* Magical shadows */
-  --shadow-magical: 0 10px 40px -10px hsl(45 100% 65% / 0.3);
-  --shadow-mystical: 0 20px 60px -10px hsl(270 60% 45% / 0.4);
-  --shadow-card: 0 8px 32px -8px hsl(235 25% 5% / 0.6);
+  /* Clean gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(45 95% 68%), hsl(45 95% 75%));
+  --gradient-secondary: linear-gradient(135deg, hsl(270 50% 45%), hsl(270 50% 55%));
+  --gradient-card: linear-gradient(145deg, hsl(235 25% 12%), hsl(235 25% 15%));
+  --gradient-surface: linear-gradient(180deg, hsl(220 30% 5%), hsl(220 25% 8%));
 
-  /* Animations */
-  --transition-magical: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Professional transitions */
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Professional spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Typography scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+
+  /* Border radius scale */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
 }
 
+/* Base styling */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
   line-height: 1.6;
   color: var(--foreground);
-  background: var(--gradient-hero);
+  background: var(--gradient-surface);
   min-height: 100vh;
   overflow-x: hidden;
+  font-feature-settings: 'rlig' 1, 'calt' 1;
 }
 
-/* Magical background effects */
+/* Clean background effects */
 body::before {
   content: '';
   position: fixed;
@@ -73,13 +109,13 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 80%, hsl(270 60% 45% / 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, hsl(45 100% 65% / 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, hsl(235 60% 25% / 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 25% 75%, hsl(270 50% 45% / 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, hsl(45 95% 68% / 0.05) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
 }
 
+/* Main app container */
 .app {
   min-height: 100vh;
   display: flex;
@@ -87,73 +123,57 @@ body::before {
   position: relative;
 }
 
+/* Header - Clean and professional */
 .app-header {
-  background: var(--gradient-mystical);
-  color: var(--foreground);
-  padding: 3rem 2rem;
-  text-align: center;
-  box-shadow: var(--shadow-mystical);
+  background: var(--card);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(16px);
-  position: relative;
-}
-
-.app-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, hsl(45 100% 65% / 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 70% 80%, hsl(270 60% 45% / 0.1) 0%, transparent 40%);
-  pointer-events: none;
+  padding: var(--space-3xl) var(--space-xl) var(--space-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(20px);
 }
 
 .app-header h1 {
-  font-size: 3rem;
-  margin-bottom: 0.75rem;
+  font-size: var(--text-4xl);
   font-weight: 700;
+  margin-bottom: var(--space-md);
   background: var(--gradient-primary);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 8px hsl(235 25% 5% / 0.5);
-  position: relative;
-  z-index: 1;
+  letter-spacing: -0.025em;
 }
 
 .app-header p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  color: var(--muted-foreground);
-  position: relative;
-  z-index: 1;
+  font-size: var(--text-lg);
+  color: var(--foreground-muted);
   max-width: 600px;
   margin: 0 auto;
+  font-weight: 400;
 }
 
+/* Main content area */
 .app-main {
   flex: 1;
-  padding: 2rem;
-  max-width: 1400px;
+  padding: var(--space-xl);
+  max-width: 1600px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* Messages */
+/* Messages - Clean status indicators */
 .message {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-xl);
   font-weight: 500;
-  backdrop-filter: blur(8px);
+  font-size: var(--text-sm);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
 }
@@ -165,285 +185,269 @@ body::before {
   left: 0;
   width: 4px;
   height: 100%;
-  background: var(--gradient-primary);
 }
 
 .error-message {
-  background: linear-gradient(135deg, hsl(0 75% 55% / 0.1), hsl(0 75% 45% / 0.05));
+  background: hsl(0 75% 55% / 0.08);
   color: hsl(0 75% 85%);
-  border-color: hsl(0 75% 35%);
+  border-color: hsl(0 75% 45% / 0.3);
 }
 
 .error-message::before {
-  background: linear-gradient(180deg, hsl(0 75% 55%), hsl(0 75% 65%));
+  background: var(--destructive);
 }
 
 .success-message {
-  background: linear-gradient(135deg, hsl(120 60% 45% / 0.1), hsl(120 60% 35% / 0.05));
+  background: hsl(120 60% 50% / 0.08);
   color: hsl(120 60% 85%);
-  border-color: hsl(120 60% 35%);
+  border-color: hsl(120 60% 45% / 0.3);
 }
 
 .success-message::before {
-  background: linear-gradient(180deg, hsl(120 60% 45%), hsl(120 60% 55%));
+  background: var(--success);
 }
 
-/* Layout */
+/* Content layout */
 .app-content {
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }
 
 .upload-section {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
+/* PDF section - Clean grid layout */
 .pdf-section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: var(--space-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Document Info */
+/* Document info card - Professional and spacious */
 .document-info {
-  background: var(--gradient-card);
-  border-radius: 0.75rem;
-  padding: 2rem;
-  box-shadow: var(--shadow-card);
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
   border: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  backdrop-filter: blur(16px);
+  gap: var(--space-2xl);
+  backdrop-filter: blur(20px);
   position: relative;
-  overflow: hidden;
+  transition: var(--transition);
 }
 
-.document-info::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--gradient-primary);
+.document-info:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
+}
+
+.doc-details {
+  flex: 1;
+  min-width: 300px;
 }
 
 .doc-details h3 {
   color: var(--foreground);
-  font-size: 1.25rem;
-  margin-bottom: 1.25rem;
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-lg);
   font-weight: 600;
-  text-shadow: 0 2px 4px hsl(235 25% 5% / 0.5);
+  letter-spacing: -0.01em;
 }
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
 }
 
 .info-item {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-muted);
+  transition: var(--transition);
+}
+
+.info-item:hover {
+  background: var(--muted-hover);
+  border-color: var(--border);
 }
 
 .info-item .label {
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   color: var(--muted-foreground);
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.05em;
 }
 
 .info-item .value {
+  font-size: var(--text-base);
   color: var(--foreground);
-  font-weight: 500;
-  word-break: break-all;
+  font-weight: 600;
+  word-break: break-word;
 }
 
 .url-link {
   color: var(--primary);
   text-decoration: none;
-  font-weight: 500;
-  transition: var(--transition-magical);
-  border-radius: 0.25rem;
-  padding: 0.25rem 0;
+  font-weight: 600;
+  transition: var(--transition);
 }
 
 .url-link:hover {
-  color: var(--primary-glow);
-  text-shadow: 0 0 8px hsl(45 100% 65% / 0.4);
+  color: var(--primary-hover);
+  text-decoration: underline;
 }
 
+/* New upload button - Clean and prominent */
 .new-upload-btn {
-  background: var(--gradient-mystical);
-  color: var(--foreground);
-  border: 1px solid var(--accent);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
+  background: var(--gradient-primary);
+  color: var(--primary-foreground);
+  border: none;
+  padding: var(--space-lg) var(--space-2xl);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
   font-weight: 600;
   cursor: pointer;
-  transition: var(--transition-magical);
-  box-shadow: var(--shadow-mystical);
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
   white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: fit-content;
 }
 
 .new-upload-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px hsl(270 60% 45% / 0.5);
-  background: linear-gradient(135deg, hsl(270 60% 55%), hsl(270 60% 65%));
+  box-shadow: var(--shadow-md);
+  background: var(--primary-hover);
 }
 
-.doc-details h3 {
-  color: var(--foreground);
-  font-size: 1.25rem;
-  margin-bottom: 1.25rem;
-  font-weight: 600;
-  text-shadow: 0 2px 4px hsl(235 25% 5% / 0.5);
+.new-upload-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
-/* Viewer and Summary Sections */
+/* Section containers - Clean and organized */
 .viewer-section,
 .summary-section {
-  background: var(--gradient-card);
-  border-radius: 0.75rem;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
-  backdrop-filter: blur(16px);
-  overflow: hidden;
-  position: relative;
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
 }
 
-.viewer-section::before,
-.summary-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--gradient-mystical);
+.viewer-section:hover,
+.summary-section:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
 }
 
-.summary-section::before {
-  background: var(--gradient-primary);
-}
-
-/* Footer */
+/* Footer - Clean and minimal */
 .app-footer {
   background: var(--card);
-  color: var(--muted-foreground);
-  text-align: center;
-  padding: 2rem;
   border-top: 1px solid var(--border);
-  backdrop-filter: blur(8px);
+  padding: var(--space-xl);
+  text-align: center;
+  margin-top: var(--space-3xl);
+  backdrop-filter: blur(20px);
 }
 
 .app-footer p {
-  margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.8;
+  color: var(--muted-foreground);
+  font-size: var(--text-sm);
+  font-weight: 400;
 }
 
-/* Responsive Design */
+/* Responsive design */
 @media (max-width: 1024px) {
   .pdf-section {
-    grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
   
-  .app-main {
-    padding: 1.5rem;
+  .document-info {
+    padding: var(--space-xl);
+    gap: var(--space-xl);
+  }
+  
+  .viewer-section,
+  .summary-section {
+    padding: var(--space-xl);
   }
 }
 
 @media (max-width: 768px) {
+  .app-main {
+    padding: var(--space-lg);
+  }
+  
   .app-header {
-    padding: 2rem 1rem;
+    padding: var(--space-2xl) var(--space-lg) var(--space-xl);
   }
   
   .app-header h1 {
-    font-size: 2.25rem;
+    font-size: var(--text-3xl);
   }
   
   .app-header p {
-    font-size: 1rem;
-  }
-  
-  .app-main {
-    padding: 1rem;
+    font-size: var(--text-base);
   }
   
   .document-info {
     flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
+    align-items: stretch;
+    padding: var(--space-lg);
   }
   
   .info-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
   
   .new-upload-btn {
-    width: 100%;
-    text-align: center;
+    align-self: stretch;
+    justify-content: center;
+    margin-top: var(--space-lg);
+  }
+  
+  .viewer-section,
+  .summary-section {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    padding: var(--space-md);
+  }
+  
+  .app-header {
+    padding: var(--space-xl) var(--space-md);
   }
   
   .message {
-    padding: 1rem;
-    font-size: 0.9rem;
+    padding: var(--space-md);
+    gap: var(--space-sm);
   }
-}
-
-/* Magical animations */
-@keyframes magicalFloat {
-  0%, 100% {
-    transform: translateY(0px);
+  
+  .document-info,
+  .viewer-section,
+  .summary-section {
+    padding: var(--space-md);
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-}
-
-.document-info:hover {
-  animation: magicalFloat 3s ease-in-out infinite;
-}
-
-/* Add magical sparkle effects */
-.app-header::after {
-  content: '✨';
-  position: absolute;
-  top: 20%;
-  right: 10%;
-  font-size: 1.5rem;
-  animation: sparkle 2s ease-in-out infinite;
-  animation-delay: 0.5s;
-}
-
-.document-info::after {
-  content: '🔮';
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.25rem;
-  opacity: 0.6;
-  animation: sparkle 3s ease-in-out infinite;
-  animation-delay: 1s;
 }
