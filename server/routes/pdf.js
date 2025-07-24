@@ -88,12 +88,13 @@ router.get('/pdf-proxy/:publicId', async (req, res) => {
 
     console.log('📄 Proxying PDF from Cloudinary:', cloudinaryUrl);
 
-    // Fetch PDF from Cloudinary
-    const response = await fetch(cloudinaryUrl);
-    
-    if (!response.ok) {
-      throw new Error(`Cloudinary response: ${response.status}`);
-    }
+    // Use axios instead of fetch for Node.js compatibility
+    const axios = require('axios');
+    const response = await axios({
+      method: 'get',
+      url: cloudinaryUrl,
+      responseType: 'arraybuffer'
+    });
 
     // Set comprehensive headers for PDF viewing and embedding
     res.setHeader('Content-Type', 'application/pdf');
@@ -103,10 +104,11 @@ router.get('/pdf-proxy/:publicId', async (req, res) => {
     res.setHeader('X-Frame-Options', 'SAMEORIGIN');
     res.setHeader('Content-Security-Policy', "frame-ancestors 'self' localhost:3000");
     res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('Content-Disposition', 'inline'); // Force inline viewing instead of download
+    res.setHeader('Accept-Ranges', 'bytes'); // Enable range requests for better streaming
     
-    // Stream the PDF
-    const buffer = await response.arrayBuffer();
-    res.send(Buffer.from(buffer));
+    // Send the PDF buffer
+    res.send(Buffer.from(response.data));
     
   } catch (error) {
     console.error('❌ PDF proxy error:', error);

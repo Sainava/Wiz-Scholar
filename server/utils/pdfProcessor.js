@@ -22,7 +22,11 @@ const uploadPDFToCloudinary = async (fileBuffer, fileName) => {
           folder: 'wiz-scholar/pdfs',
           public_id: `pdf_${Date.now()}_${fileName.replace(/\.[^/.]+$/, "")}`,
           use_filename: true,
-          unique_filename: false
+          unique_filename: false,
+          // Set proper content type for PDFs
+          content_type: 'application/pdf',
+          // Allow inline viewing instead of forcing download
+          disposition: 'inline'
         },
         (error, result) => {
           if (error) {

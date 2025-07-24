@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PDFUploader from './components/PDFUploader';
 import PDFViewer from './components/PDFViewer';
+import SummaryPanel from './components/SummaryPanel';
 import './App.css';
 
 function App() {
@@ -105,6 +106,18 @@ function App() {
                 <PDFViewer 
                   pdfUrl={uploadedPDF.cloudinaryUrl}
                   filename={uploadedPDF.filename}
+                  directUrl={uploadedPDF.cloudinaryUrl}
+                  proxyUrl={uploadedPDF.proxyUrl}
+                />
+              </div>
+
+              {/* AI Summary Panel */}
+              <div className="summary-section">
+                <SummaryPanel
+                  pdfUrl={uploadedPDF.cloudinaryUrl}
+                  filename={uploadedPDF.filename}
+                  directUrl={uploadedPDF.cloudinaryUrl}
+                  proxyUrl={uploadedPDF.proxyUrl}
                 />
               </div>
             </div>

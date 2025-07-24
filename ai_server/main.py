@@ -61,8 +61,8 @@ def get_gemini_client():
     # Rotate through API keys to distribute load
     api_key = random.choice(GEMINI_API_KEYS)
     genai.configure(api_key=api_key)
-    # Use the latest Gemini Pro model (1.5-pro is the current "2.5 Pro" equivalent)
-    return genai.GenerativeModel('gemini-2.5-pro-latest')
+    # Use the correct Gemini Pro model name with proper prefix
+    return genai.GenerativeModel('models/gemini-2.5-pro')
 
 def extract_text_from_pdf(pdf_content: bytes) -> str:
     """Extract text from PDF content"""
@@ -312,13 +312,95 @@ async def answer_question(request: QuestionAnswerRequest):
         logger.error(f"Question answering failed: {e}")
         raise HTTPException(status_code=500, detail=f"Question answering failed: {str(e)}")
 
+@app.post("/api/summarize-pdf-url")
+async def summarize_pdf_from_url(
+    pdf_url: str = Form(...),
+    summary_type: str = Form("academic"),
+    max_length: Optional[int] = Form(None),
+    filename: Optional[str] = Form(None)
+):
+    """Summarize a PDF from a URL (e.g., Cloudinary URL)"""
+    try:
+        import requests
+        
+        # Download PDF from URL
+        logger.info(f"Downloading PDF from URL: {pdf_url}")
+        response = requests.get(pdf_url, timeout=30)
+        response.raise_for_status()
+        
+        # Validate content type
+        content_type = response.headers.get('content-type', '')
+        if 'pdf' not in content_type.lower() and not pdf_url.lower().endswith('.pdf'):
+            logger.warning(f"Unexpected content type: {content_type}")
+        
+        # Check file size
+        pdf_content = response.content
+        if len(pdf_content) > MAX_FILE_SIZE:
+            raise HTTPException(status_code=400, detail=f"File too large. Max size: {MAX_FILE_SIZE/1024/1024:.1f}MB")
+        
+        # Extract text from PDF
+        text_content = extract_text_from_pdf(pdf_content)
+        
+        if not text_content.strip():
+            raise HTTPException(status_code=400, detail="No readable text found in PDF")
+        
+        logger.info(f"Extracted {len(text_content)} characters from PDF")
+        
+        # Create summary request
+        summary_request = SummaryRequest(
+            text=text_content,
+            summary_type=summary_type,
+            max_length=max_length
+        )
+        
+        # Process summary
+        summary_response = await summarize_text(summary_request)
+        
+        # Add metadata to response
+        response_dict = summary_response.dict()
+        response_dict["filename"] = filename or "PDF Document"
+        response_dict["source_url"] = pdf_url
+        response_dict["text_length"] = len(text_content)
+        
+        logger.info(f"Successfully summarized PDF: {filename}")
+        return response_dict
+        
+    except requests.RequestException as e:
+        logger.error(f"Failed to download PDF from URL: {e}")
+        raise HTTPException(status_code=400, detail=f"Failed to download PDF: {str(e)}")
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"PDF URL summarization failed: {e}")
+        raise HTTPException(status_code=500, detail=f"PDF processing failed: {str(e)}")
+
 @app.get("/api/models")
 async def list_models():
-    return {
-        "models": [
-            {"id": "placeholder", "name": "Placeholder Model", "status": "available"}
-        ]
-    }
+    """List available Gemini models"""
+    try:
+        if not GEMINI_API_KEYS:
+            return {"error": "No API keys configured"}
+        
+        import google.generativeai as genai
+        genai.configure(api_key=GEMINI_API_KEYS[0])
+        
+        # Get available models
+        models = []
+        for model in genai.list_models():
+            if 'generateContent' in model.supported_generation_methods:
+                models.append({
+                    "id": model.name,
+                    "name": model.display_name if hasattr(model, 'display_name') else model.name,
+                    "status": "available"
+                })
+        
+        return {"models": models}
+    except Exception as e:
+        logger.error(f"Failed to list models: {e}")
+        return {"models": [
+            {"id": "gemini-1.5-pro", "name": "Gemini 1.5 Pro", "status": "available"},
+            {"id": "gemini-1.5-flash", "name": "Gemini 1.5 Flash", "status": "available"}
+        ]}
 
 if __name__ == "__main__":
     import uvicorn
