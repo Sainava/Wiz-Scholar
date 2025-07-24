@@ -1,12 +1,60 @@
-/* index.css */
+/* Wiz Scholar - Magical Index CSS */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Magical Dark Theme - Deep night sky */
+  --background: hsl(220 30% 5%);
+  --foreground: hsl(45 100% 85%);
+
+  /* Enchanted Cards - Mystical purple-blue */
+  --card: hsl(235 25% 8%);
+  --card-foreground: hsl(45 100% 90%);
+
+  /* Primary - Hogwarts Gold */
+  --primary: hsl(45 100% 65%);
+  --primary-foreground: hsl(220 30% 5%);
+  --primary-glow: hsl(45 100% 75%);
+
+  /* Secondary - House Colors */
+  --secondary: hsl(235 60% 25%);
+  --secondary-foreground: hsl(45 100% 90%);
+
+  /* Muted - Subtle magical tones */
+  --muted: hsl(235 20% 15%);
+  --muted-foreground: hsl(220 15% 65%);
+
+  /* Accent - Mystical Purple */
+  --accent: hsl(270 60% 45%);
+  --accent-foreground: hsl(45 100% 95%);
+
+  /* Destructive - Warning red */
+  --destructive: hsl(0 75% 55%);
+  --destructive-foreground: hsl(45 100% 95%);
+
+  /* Borders and inputs */
+  --border: hsl(235 25% 20%);
+  --input: hsl(235 25% 15%);
+  --ring: hsl(45 100% 65%);
+
+  /* Magical gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(45 100% 65%), hsl(45 100% 75%));
+  --gradient-mystical: linear-gradient(135deg, hsl(235 60% 25%), hsl(270 60% 45%));
+  --gradient-hero: linear-gradient(180deg, hsl(220 30% 5%), hsl(235 25% 8%));
+  --gradient-card: linear-gradient(145deg, hsl(235 25% 8%), hsl(235 25% 12%));
+
+  /* Magical shadows */
+  --shadow-magical: 0 10px 40px -10px hsl(45 100% 65% / 0.3);
+  --shadow-mystical: 0 20px 60px -10px hsl(270 60% 45% / 0.4);
+  --shadow-card: 0 8px 32px -8px hsl(235 25% 5% / 0.6);
+
+  /* Animations */
+  --transition-magical: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: dark;
+  color: var(--foreground);
+  background: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,17 +70,58 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--gradient-hero);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* Magical background effects */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, hsl(270 60% 45% / 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, hsl(45 100% 65% / 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, hsl(235 60% 25% / 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 #root {
   min-height: 100vh;
+  position: relative;
 }
 
-/* Light theme override */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+/* Magical scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(235 25% 10%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(45 100% 65%), hsl(270 60% 45%));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(45 100% 75%), hsl(270 60% 55%));
+}
+
+/* Magical selection styling */
+::selection {
+  background: hsl(45 100% 65% / 0.3);
+  color: hsl(45 100% 95%);
+}
+
+::-moz-selection {
+  background: hsl(45 100% 65% / 0.3);
+  color: hsl(45 100% 95%);
 }

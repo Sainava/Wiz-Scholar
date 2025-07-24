@@ -1,82 +1,125 @@
-/* PDFUploader.css */
+/* PDFUploader - Magical Wiz Scholar Theme */
 .pdf-uploader {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .upload-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .upload-header h3 {
-  margin: 0 0 8px 0;
-  color: #333;
-  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  color: hsl(45 100% 85%);
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, hsl(45 100% 65%), hsl(45 100% 75%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 8px hsl(235 25% 5% / 0.5);
 }
 
 .upload-header p {
   margin: 0;
-  color: #666;
-  font-size: 0.9rem;
+  color: hsl(220 15% 65%);
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
 .upload-area {
-  border: 2px dashed #d1d5db;
-  border-radius: 12px;
-  padding: 40px 20px;
+  border: 2px dashed hsl(235 25% 20%);
+  border-radius: 0.75rem;
+  padding: 3rem 2rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  background: #fafafa;
-  min-height: 160px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(145deg, hsl(235 25% 8%), hsl(235 25% 12%));
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px -8px hsl(235 25% 5% / 0.6);
+  backdrop-filter: blur(16px);
+}
+
+.upload-area::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, hsl(45 100% 65% / 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .upload-area:hover {
-  border-color: #3b82f6;
-  background: #f8faff;
+  border-color: hsl(45 100% 65%);
+  background: linear-gradient(145deg, hsl(235 25% 10%), hsl(235 25% 15%));
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px -8px hsl(45 100% 65% / 0.3);
+}
+
+.upload-area:hover::before {
+  opacity: 1;
 }
 
 .upload-area.dragging {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: hsl(45 100% 65%);
+  background: linear-gradient(145deg, hsl(235 25% 12%), hsl(235 25% 18%));
   border-style: solid;
+  box-shadow: 0 16px 48px -8px hsl(45 100% 65% / 0.4);
+  transform: scale(1.02);
+}
+
+.upload-area.dragging::before {
+  opacity: 1;
 }
 
 .upload-area.has-file {
-  border-color: #10b981;
-  background: #f0fdf4;
+  border-color: hsl(120 60% 45%);
+  background: linear-gradient(145deg, hsl(120 60% 10% / 0.3), hsl(120 60% 15% / 0.2));
   cursor: default;
+  box-shadow: 0 12px 40px -8px hsl(120 60% 45% / 0.3);
 }
 
 .upload-prompt {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .upload-icon {
-  font-size: 3rem;
-  margin-bottom: 8px;
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 4px 8px hsl(235 25% 5% / 0.3));
+  animation: magicalFloat 3s ease-in-out infinite;
 }
 
 .upload-text {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #374151;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: hsl(45 100% 85%);
+  text-shadow: 0 2px 4px hsl(235 25% 5% / 0.5);
 }
 
 .upload-subtext {
   margin: 0;
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.95rem;
+  color: hsl(220 15% 65%);
+  opacity: 0.8;
 }
 
 .file-preview {
@@ -86,16 +129,19 @@
 .file-info {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, hsl(235 25% 10%), hsl(235 25% 15%));
+  border-radius: 0.75rem;
+  border: 1px solid hsl(235 25% 20%);
+  box-shadow: 0 4px 16px hsl(235 25% 5% / 0.4);
+  backdrop-filter: blur(8px);
 }
 
 .file-icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px hsl(235 25% 5% / 0.3));
 }
 
 .file-details {
@@ -104,115 +150,177 @@
 }
 
 .file-name {
-  margin: 0 0 4px 0;
-  font-weight: 500;
-  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+  color: hsl(45 100% 85%);
   word-break: break-word;
+  font-size: 1rem;
+  text-shadow: 0 2px 4px hsl(235 25% 5% / 0.5);
 }
 
 .file-size {
   margin: 0;
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.9rem;
+  color: hsl(220 15% 65%);
+  opacity: 0.8;
 }
 
 .remove-file-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
+  background: linear-gradient(135deg, hsl(0 75% 55%), hsl(0 75% 65%));
+  color: hsl(45 100% 95%);
+  border: 1px solid hsl(0 75% 45%);
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  box-shadow: 0 4px 12px hsl(0 75% 55% / 0.3);
 }
 
 .remove-file-btn:hover:not(:disabled) {
-  background: #dc2626;
+  background: linear-gradient(135deg, hsl(0 75% 65%), hsl(0 75% 75%));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px hsl(0 75% 55% / 0.4);
 }
 
 .remove-file-btn:disabled {
-  background: #9ca3af;
+  background: hsl(235 25% 20%);
+  color: hsl(220 15% 45%);
   cursor: not-allowed;
+  box-shadow: none;
+  border-color: hsl(235 25% 25%);
 }
 
 .upload-actions {
-  margin-top: 20px;
+  margin-top: 2rem;
   text-align: center;
 }
 
 .upload-btn {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
+  background: linear-gradient(135deg, hsl(45 100% 65%), hsl(45 100% 75%));
+  color: hsl(220 30% 5%);
+  border: 1px solid hsl(45 100% 55%);
+  border-radius: 0.5rem;
+  padding: 0.75rem 2rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
-  min-width: 160px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 180px;
+  box-shadow: 0 6px 20px hsl(45 100% 65% / 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
 .upload-btn:hover:not(:disabled) {
-  background: #2563eb;
+  background: linear-gradient(135deg, hsl(45 100% 75%), hsl(45 100% 85%));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px hsl(45 100% 65% / 0.4);
 }
 
 .upload-btn:disabled {
-  background: #9ca3af;
+  background: hsl(235 25% 20%);
+  color: hsl(220 15% 45%);
   cursor: not-allowed;
+  box-shadow: none;
+  border-color: hsl(235 25% 25%);
+  transform: none;
 }
 
 .upload-progress {
-  margin-top: 16px;
+  margin-top: 1.5rem;
 }
 
 .progress-bar {
   width: 100%;
   height: 8px;
-  background: #e5e7eb;
-  border-radius: 4px;
+  background: hsl(235 25% 15%);
+  border-radius: 0.5rem;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 0.75rem;
+  border: 1px solid hsl(235 25% 20%);
+  box-shadow: inset 0 2px 4px hsl(235 25% 5% / 0.3);
 }
 
 .progress-fill {
   height: 100%;
-  background: #3b82f6;
+  background: linear-gradient(90deg, hsl(45 100% 65%), hsl(45 100% 75%));
   transition: width 0.3s ease;
-  border-radius: 4px;
+  border-radius: 0.5rem;
+  position: relative;
+  box-shadow: 0 0 8px hsl(45 100% 65% / 0.5);
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, hsl(45 100% 85% / 0.3), transparent);
+  animation: progressShimmer 2s ease-in-out infinite;
+}
+
+@keyframes progressShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .progress-text {
   margin: 0;
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.9rem;
+  color: hsl(220 15% 65%);
   text-align: center;
+  font-weight: 500;
+}
+
+/* Magical animations */
+@keyframes magicalFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 /* Responsive */
 @media (max-width: 640px) {
   .pdf-uploader {
-    padding: 16px;
+    padding: 1rem;
   }
   
   .upload-area {
-    padding: 30px 16px;
-    min-height: 140px;
+    padding: 2rem 1rem;
+    min-height: 160px;
+  }
+  
+  .upload-header h3 {
+    font-size: 1.75rem;
+  }
+  
+  .upload-header p {
+    font-size: 1rem;
   }
   
   .file-info {
     flex-direction: column;
     gap: 12px;
+    gap: 1rem;
     text-align: center;
   }
   
   .file-details {
     text-align: center;
+  }
+  
+  .upload-btn {
+    min-width: 100%;
   }
 }

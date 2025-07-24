@@ -155,8 +155,8 @@ const PDFViewer = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
                   console.error('PDF.js viewer failed to load:', e);
                 }}
               />
-              <div style={{ fontSize: '0.8rem', color: '#666', marginTop: '8px' }}>
-                💡 PDF.js works best with the proxy URL. Switch to "Proxy URL" mode if needed.
+              <div style={{ fontSize: '0.85rem', color: 'hsl(220 15% 65%)', marginTop: '12px', padding: '0.75rem', background: 'hsl(235 25% 10%)', borderRadius: '0.5rem', border: '1px solid hsl(235 25% 20%)' }}>
+                ✨ <strong style={{ color: 'hsl(45 100% 85%)' }}>Magical Tip:</strong> PDF.js works best with the proxy URL. Switch to "Proxy URL" mode if you experience viewing issues.
               </div>
             </div>
           )}
