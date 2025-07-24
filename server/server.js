@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const axios = require('axios');
 const upload = require('./middlewares/multer.middleware');
 const { 
   uploadPDFToCloudinary, 
@@ -65,40 +66,63 @@ app.get('/api/health', (req, res) => {
 // PDF Summarizer proxy routes to FastAPI
 app.post('/api/summarize', async (req, res) => {
   try {
-    const response = await fetch('http://localhost:8001/api/summarize', {
-      method: 'POST',
+    const response = await axios.post('http://localhost:8001/api/summarize', req.body, {
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(req.body)
+      }
     });
     
-    const data = await response.json();
-    res.json(data);
+    res.json(response.data);
   } catch (error) {
     res.status(500).json({ 
       error: 'Failed to process summarization request',
-      message: error.message 
+      message: error.response?.data?.detail || error.message 
     });
   }
 });
 
 app.post('/api/question-answer', async (req, res) => {
   try {
-    const response = await fetch('http://localhost:8001/api/question-answer', {
-      method: 'POST',
+    const response = await axios.post('http://localhost:8001/api/question-answer', req.body, {
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(req.body)
+      }
     });
     
-    const data = await response.json();
-    res.json(data);
+    res.json(response.data);
   } catch (error) {
     res.status(500).json({ 
       error: 'Failed to process Q&A request',
-      message: error.message 
+      message: error.response?.data?.detail || error.message 
+    });
+  }
+});
+
+app.post('/api/summarize-pdf-url', upload.none(), async (req, res) => {
+  try {
+    // Create FormData for the AI server
+    const FormData = require('form-data');
+    const formData = new FormData();
+    
+    // Forward all form fields to the AI server
+    Object.keys(req.body).forEach(key => {
+      formData.append(key, req.body[key]);
+    });
+    
+    console.log('🔄 Proxying PDF URL summarization:', req.body);
+    
+    const response = await axios.post('http://localhost:8001/api/summarize-pdf-url', formData, {
+      headers: {
+        ...formData.getHeaders()
+      }
+    });
+    
+    res.json(response.data);
+  } catch (error) {
+    console.error('❌ PDF URL summarization proxy error:', error.response?.data || error.message);
+    res.status(500).json({ 
+      error: 'Failed to process PDF URL summarization request',
+      message: error.response?.data?.detail || error.message 
     });
   }
 });
@@ -295,17 +319,17 @@ app.post('/api/summarize-pdf', async (req, res) => {
     
     // If using multer or similar, you'd handle file upload here
     // For now, we'll proxy the multipart form data directly
-    const response = await fetch('http://localhost:8001/api/summarize-pdf', {
-      method: 'POST',
-      body: req.body  // This should contain the FormData
+    const response = await axios.post('http://localhost:8001/api/summarize-pdf', req.body, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
     
-    const data = await response.json();
-    res.json(data);
+    res.json(response.data);
   } catch (error) {
     res.status(500).json({ 
       error: 'Failed to process PDF summarization request',
-      message: error.message 
+      message: error.response?.data?.detail || error.message 
     });
   }
 });

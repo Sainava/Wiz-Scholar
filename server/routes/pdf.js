@@ -1,7 +1,7 @@
 const express = require('express');
 const upload = require('../middlewares/multer.middleware');
 const { uploadPDFToCloudinary } = require('../utils/pdfProcessor');
-const fetch = require('node-fetch');
+const axios = require('axios');
 const router = express.Router();
 
 /**
@@ -72,12 +72,21 @@ router.post('/upload-pdf', upload.single('pdf'), async (req, res) => {
 });
 
 /**
- * GET /pdf-proxy/:publicId
+ * GET /pdf-proxy/* (using regex to capture everything after pdf-proxy/)
  * Proxy route to serve PDFs from Cloudinary with proper CORS headers
  */
-router.get('/pdf-proxy/:publicId', async (req, res) => {
+router.get(/^\/pdf-proxy\/(.*)/, async (req, res) => {
   try {
-    const { publicId } = req.params;
+    // Get the publicId from the captured group
+    const publicId = req.params[0];
+    
+    if (!publicId) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing publicId',
+        message: 'PDF public ID is required'
+      });
+    }
     
     // Generate Cloudinary URL with raw resource type
     const { cloudinary } = require('../utils/cloudinary');
@@ -88,8 +97,7 @@ router.get('/pdf-proxy/:publicId', async (req, res) => {
 
     console.log('📄 Proxying PDF from Cloudinary:', cloudinaryUrl);
 
-    // Use axios instead of fetch for Node.js compatibility
-    const axios = require('axios');
+    // Use axios for making the HTTP request
     const response = await axios({
       method: 'get',
       url: cloudinaryUrl,
@@ -102,7 +110,7 @@ router.get('/pdf-proxy/:publicId', async (req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-    res.setHeader('Content-Security-Policy', "frame-ancestors 'self' localhost:3000");
+    res.setHeader('Content-Security-Policy', "frame-ancestors 'self' localhost:3000 localhost:3001");
     res.setHeader('Cache-Control', 'public, max-age=3600');
     res.setHeader('Content-Disposition', 'inline'); // Force inline viewing instead of download
     res.setHeader('Accept-Ranges', 'bytes'); // Enable range requests for better streaming

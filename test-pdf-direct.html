@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Test - Direct Access</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; }
+        .embed-container { margin: 10px 0; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; font-family: monospace; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>PDF Viewing Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Step 1: Test Backend API</h2>
+        <button onclick="testBackendHealth()">Test Backend Health</button>
+        <div id="backend-log" class="log"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Step 2: Test Direct Cloudinary URL</h2>
+        <p>This will test a direct Cloudinary URL access:</p>
+        <input type="text" id="cloudinary-url" placeholder="Enter Cloudinary PDF URL" style="width: 500px;">
+        <button onclick="testDirectCloudinaryURL()">Test Direct Access</button>
+        <div id="cloudinary-log" class="log"></div>
+        <div id="cloudinary-embed" class="embed-container"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Step 3: Test Proxy URL</h2>
+        <p>This will test our backend proxy URL:</p>
+        <input type="text" id="proxy-url" placeholder="Enter proxy path (e.g., /api/pdf-proxy/abc123)" style="width: 500px;">
+        <button onclick="testProxyURL()">Test Proxy Access</button>
+        <div id="proxy-log" class="log"></div>
+        <div id="proxy-embed" class="embed-container"></div>
+    </div>
+
+    <script>
+        function log(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+        }
+
+        async function testBackendHealth() {
+            const logEl = 'backend-log';
+            document.getElementById(logEl).textContent = '';
+            
+            try {
+                log(logEl, 'Testing backend health...');
+                const response = await fetch('http://localhost:5001/api/health');
+                const data = await response.json();
+                log(logEl, `✅ Backend is healthy: ${JSON.stringify(data, null, 2)}`);
+            } catch (error) {
+                log(logEl, `❌ Backend test failed: ${error.message}`);
+            }
+        }
+
+        async function testDirectCloudinaryURL() {
+            const logEl = 'cloudinary-log';
+            const embedEl = 'cloudinary-embed';
+            document.getElementById(logEl).textContent = '';
+            document.getElementById(embedEl).innerHTML = '';
+            
+            const url = document.getElementById('cloudinary-url').value;
+            if (!url) {
+                log(logEl, '❌ Please enter a Cloudinary URL');
+                return;
+            }
+
+            try {
+                log(logEl, `Testing direct Cloudinary URL: ${url}`);
+                
+                // Test with HEAD request
+                const headResponse = await fetch(url, { method: 'HEAD' });
+                log(logEl, `HEAD Response: ${headResponse.status} ${headResponse.statusText}`);
+                log(logEl, `Content-Type: ${headResponse.headers.get('content-type')}`);
+                log(logEl, `Content-Length: ${headResponse.headers.get('content-length')}`);
+                
+                if (headResponse.ok) {
+                    log(logEl, '✅ Direct URL is accessible. Creating embed...');
+                    document.getElementById(embedEl).innerHTML = `
+                        <embed src="${url}" type="application/pdf" width="100%" height="400px" style="border: 1px solid #ccc;">
+                    `;
+                } else {
+                    log(logEl, `❌ Direct URL failed: ${headResponse.status}`);
+                }
+            } catch (error) {
+                log(logEl, `❌ Direct URL test failed: ${error.message}`);
+            }
+        }
+
+        async function testProxyURL() {
+            const logEl = 'proxy-log';
+            const embedEl = 'proxy-embed';
+            document.getElementById(logEl).textContent = '';
+            document.getElementById(embedEl).innerHTML = '';
+            
+            const proxyPath = document.getElementById('proxy-url').value;
+            if (!proxyPath) {
+                log(logEl, '❌ Please enter a proxy path');
+                return;
+            }
+
+            const fullUrl = `http://localhost:5001${proxyPath}`;
+            
+            try {
+                log(logEl, `Testing proxy URL: ${fullUrl}`);
+                
+                // Test with HEAD request
+                const headResponse = await fetch(fullUrl, { method: 'HEAD' });
+                log(logEl, `HEAD Response: ${headResponse.status} ${headResponse.statusText}`);
+                log(logEl, `Content-Type: ${headResponse.headers.get('content-type')}`);
+                log(logEl, `Content-Length: ${headResponse.headers.get('content-length')}`);
+                log(logEl, `CORS Headers: ${headResponse.headers.get('access-control-allow-origin')}`);
+                
+                if (headResponse.ok) {
+                    log(logEl, '✅ Proxy URL is accessible. Creating embed...');
+                    document.getElementById(embedEl).innerHTML = `
+                        <embed src="${fullUrl}" type="application/pdf" width="100%" height="400px" style="border: 1px solid #ccc;">
+                    `;
+                } else {
+                    log(logEl, `❌ Proxy URL failed: ${headResponse.status}`);
+                }
+            } catch (error) {
+                log(logEl, `❌ Proxy URL test failed: ${error.message}`);
+            }
+        }
+
+        // Auto-test backend on load
+        window.onload = () => {
+            testBackendHealth();
+            
+            // Pre-fill with our test URLs
+            document.getElementById('cloudinary-url').value = 'https://res.cloudinary.com/dyj7psrp2/raw/upload/v1753368328/wiz-scholar/pdfs/pdf_1753368325828_test-sample';
+            document.getElementById('proxy-url').value = '/api/pdf-proxy/wiz-scholar/pdfs/pdf_1753368325828_test-sample';
+        };
+    </script>
+</body>
+</html>

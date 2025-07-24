@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './PDFViewer.css';
 
 const PDFViewer = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
-  const [viewMode, setViewMode] = useState('embed');
+  const [viewMode, setViewMode] = useState('pdfjs');
   const [urlMode, setUrlMode] = useState('proxy'); // 'proxy' or 'direct'
   const [pdfData, setPdfData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,15 +31,28 @@ const PDFViewer = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
   useEffect(() => {
     if (currentUrl && viewMode === 'blob') {
       setLoading(true);
-      fetch(currentUrl)
-        .then(response => response.blob())
+      console.log('🔄 Fetching PDF as blob:', currentUrl);
+      fetch(currentUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/pdf,*/*',
+        },
+      })
+        .then(response => {
+          console.log('✅ Blob fetch response:', response.status, response.headers.get('content-type'));
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+          return response.blob();
+        })
         .then(blob => {
+          console.log('✅ PDF blob created:', blob.size, 'bytes, type:', blob.type);
           const url = URL.createObjectURL(blob);
           setPdfData(url);
           setLoading(false);
         })
         .catch(error => {
-          console.error('Failed to load PDF as blob:', error);
+          console.error('❌ Failed to load PDF as blob:', error);
           setLoading(false);
         });
     }
@@ -105,12 +118,6 @@ const PDFViewer = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
         {/* Viewer Mode Selector */}
         <div className="viewer-mode-selector">
           <button 
-            onClick={() => setViewMode('embed')} 
-            className={viewMode === 'embed' ? 'active' : ''}
-          >
-            📄 Direct Embed
-          </button>
-          <button 
             onClick={() => setViewMode('pdfjs')} 
             className={viewMode === 'pdfjs' ? 'active' : ''}
           >
@@ -122,12 +129,6 @@ const PDFViewer = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
           >
             💾 Blob Viewer
           </button>
-          <button 
-            onClick={() => setViewMode('google')} 
-            className={viewMode === 'google' ? 'active' : ''}
-          >
-            🌐 Google Docs Viewer
-          </button>
         </div>
 
         {/* PDF Display Area */}
@@ -136,18 +137,6 @@ const PDFViewer = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
             <div className="loading-state">
               <div className="spinner"></div>
               <p>Loading PDF...</p>
-            </div>
-          )}
-
-          {viewMode === 'embed' && !loading && (
-            <div className="pdf-embed-container">
-              <embed
-                src={`${currentUrl}#toolbar=1&navpanes=1&scrollbar=1`}
-                type="application/pdf"
-                width="100%"
-                height="700px"
-                style={{ border: 'none' }}
-              />
             </div>
           )}
 
@@ -186,18 +175,6 @@ const PDFViewer = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
                   </a>
                 </p>
               </object>
-            </div>
-          )}
-
-          {viewMode === 'google' && !loading && (
-            <div className="pdf-iframe-container">
-              <iframe
-                src={`https://docs.google.com/gview?url=${encodeURIComponent(currentUrl)}&embedded=true`}
-                width="100%"
-                height="700px"
-                style={{ border: 'none' }}
-                title="Google Docs PDF Viewer"
-              />
             </div>
           )}
         </div>

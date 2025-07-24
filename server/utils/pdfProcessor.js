@@ -1,5 +1,6 @@
 const { cloudinary } = require('../utils/cloudinary');
 const pdfParse = require('pdf-parse');
+const axios = require('axios');
 
 /**
  * Upload PDF to Cloudinary
@@ -26,7 +27,11 @@ const uploadPDFToCloudinary = async (fileBuffer, fileName) => {
           // Set proper content type for PDFs
           content_type: 'application/pdf',
           // Allow inline viewing instead of forcing download
-          disposition: 'inline'
+          disposition: 'inline',
+          // Additional headers for proper PDF handling
+          context: {
+            content_type: 'application/pdf'
+          }
         },
         (error, result) => {
           if (error) {
@@ -34,6 +39,11 @@ const uploadPDFToCloudinary = async (fileBuffer, fileName) => {
             reject(error);
           } else {
             console.log('✅ Cloudinary upload success:', result.secure_url);
+            console.log('🔍 Upload result details:', {
+              resource_type: result.resource_type,
+              format: result.format,
+              content_type: result.context?.content_type
+            });
             resolve(result);
           }
         }
@@ -67,25 +77,18 @@ const extractTextFromPDF = async (fileBuffer) => {
  */
 const summarizeWithGemini = async (text, summaryType = 'academic') => {
   try {
-    const response = await fetch(`${process.env.AI_SERVER_URL}/api/summarize`, {
-      method: 'POST',
+    const response = await axios.post(`${process.env.AI_SERVER_URL}/api/summarize`, {
+      text: text,
+      summary_type: summaryType
+    }, {
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        text: text,
-        summary_type: summaryType
-      })
+      }
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.detail || 'Summarization failed');
-    }
-
-    return await response.json();
+    return response.data;
   } catch (error) {
-    throw new Error(`Gemini API call failed: ${error.message}`);
+    throw new Error(`Gemini API call failed: ${error.response?.data?.detail || error.message}`);
   }
 };
 
@@ -98,26 +101,19 @@ const summarizeWithGemini = async (text, summaryType = 'academic') => {
  */
 const askQuestionFromPDF = async (context, question, answerStyle = 'concise') => {
   try {
-    const response = await fetch(`${process.env.AI_SERVER_URL}/api/question-answer`, {
-      method: 'POST',
+    const response = await axios.post(`${process.env.AI_SERVER_URL}/api/question-answer`, {
+      context: context,
+      question: question,
+      answer_style: answerStyle
+    }, {
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        context: context,
-        question: question,
-        answer_style: answerStyle
-      })
+      }
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.detail || 'Question answering failed');
-    }
-
-    return await response.json();
+    return response.data;
   } catch (error) {
-    throw new Error(`Gemini Q&A call failed: ${error.message}`);
+    throw new Error(`Gemini Q&A call failed: ${error.response?.data?.detail || error.message}`);
   }
 };
 

@@ -33,7 +33,7 @@ const SummaryPanel = ({ pdfUrl, filename, directUrl, proxyUrl }) => {
       formData.append('summary_type', summaryType);
       formData.append('filename', filename || 'PDF Document');
 
-      const response = await fetch('http://localhost:8001/api/summarize-pdf-url', {
+      const response = await fetch('http://localhost:5001/api/summarize-pdf-url', {
         method: 'POST',
         body: formData,
       });
