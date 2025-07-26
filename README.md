@@ -1,1 +1,253 @@
-# 🧙‍♂️ Wiz Scholar - Magical PDF Summarizer ✨A enchanted document analysis platform that transforms PDFs into intelligent summaries using cutting-edge AI technology and a magical Harry Potter-inspired interface.## ✨ Features- **🎨 Magical UI**: Harry Potter-themed interface with Hogwarts gold and mystical purple colors- **📤 Smart PDF Upload**: Drag-and-drop PDF upload with magical floating animations- **🤖 AI-Powered Summarization**: Generate concise, bullet-point, or detailed summaries using Google Gemini AI- **🔍 Interactive PDF Viewer**: Built-in PDF viewer with multiple viewing modes (PDF.js, Blob)- **☁️ Cloud Storage**: Secure document storage with Cloudinary integration- **⚡ Real-time Processing**: Live progress tracking with animated AI brain spinner- **📱 Responsive Design**: Magical experience across desktop and mobile devices- **🎭 Three-Server Architecture**: Scalable architecture with dedicated servers## 🏗️ Three-Server Architecture```┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐│   React Client  │───▶│  Express Server │───▶│   AI Server     ││   Port: 3000    │    │   Port: 5001    │    │   Port: 8001    ││                 │    │                 │    │                 ││ • Magical UI    │    │ • PDF Upload    │    │ • AI Processing ││ • File Upload   │    │ • File Storage  │    │ • Summarization ││ • PDF Viewing   │    │ • Proxy Routing │    │ • Gemini AI     ││ • Theme System  │    │ • CORS Handling │    │ • Text Analysis │└─────────────────┘    └─────────────────┘    └─────────────────┘```## 🚀 Quick Start (Recommended)### One-Command Startup```bash# Clone repositorygit clone https://github.com/Sainava/Wiz-Scholar.gitcd Wiz-Scholar# Make startup script executable and runchmod +x start-wiz-scholar.sh./start-wiz-scholar.sh```This magical script will:1. 🤖 Start AI Server on port 80012. 🚀 Start Express Server on port 5001  3. ⚛️ Start React Client on port 30004. ✅ Verify all services are running5. 📊 Monitor server health### Stop All Servers```bash./stop-wiz-scholar.sh```## 🛠️ Manual Setup### Prerequisites- Node.js 18+- Python 3.8+- MongoDB- Cloudinary account- Google Gemini API keys### Step-by-Step Installation#### 1. Clone & Install Dependencies```bashgit clone https://github.com/Sainava/Wiz-Scholar.gitcd Wiz-Scholar# Install client dependenciescd client && npm install && cd ..# Install server dependencies  cd server && npm install && cd ..# Install AI server dependenciescd ai_serverpython3 -m venv venvsource venv/bin/activate  # On Windows: venv\Scripts\activatepip install -r requirements.txtcd ..```#### 2. Environment Configuration**ai_server/.env**```propertiesGEMINI_API_KEY_1=your_primary_gemini_keyGEMINI_API_KEY_2=your_backup_gemini_keyHOST=0.0.0.0PORT=8001DEBUG=TrueMAX_FILE_SIZE=10485760ALLOWED_EXTENSIONS=pdf,txt,docx```**server/.env**```propertiesMONGODB_URI=mongodb://localhost:27017/wiz-scholarCLOUDINARY_CLOUD_NAME=your_cloud_nameCLOUDINARY_API_KEY=your_api_keyCLOUDINARY_API_SECRET=your_api_secretAI_SERVER_URL=http://localhost:8001PORT=5001CORS_ORIGIN=http://localhost:3000```**client/.env**```propertiesVITE_SERVER_URL=http://localhost:5001VITE_CLOUDINARY_CLOUD_NAME=your_cloud_nameVITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset```#### 3. Manual Server Startup**Terminal 1: AI Server**```bashcd ai_serversource venv/bin/activatepython main.py```**Terminal 2: Express Server**```bashcd servernpm start```**Terminal 3: React Client**```bashcd clientnpm run dev```#### 4. Access the Application- 🎨 **Frontend**: http://localhost:3000 (Magical UI)- 🚀 **API Server**: http://localhost:5001 (Express Backend)- 🤖 **AI Server**: http://localhost:8001 (FastAPI AI Service)## 🎯 How It Works### 📄 PDF Upload Flow```1. User drops PDF on magical upload zone2. File sent to Express server (port 5001)3. Express uploads to Cloudinary for storage4. Metadata saved to MongoDB5. PDF URL returned to client for viewing```### 🧠 AI Summarization Flow```1. User selects summary type and clicks "Summarize"2. Express server receives request with PDF URL3. Express proxies request to AI server (port 8001)4. AI server downloads PDF and extracts text5. Text processed by Google Gemini AI6. Summary returned through Express to client7. Magical animations display the results```### 🔄 Server Communication```javascript// Client to Expressfetch('http://localhost:5001/api/pdf/upload', {  method: 'POST',  body: formData});// Express to AI Serverfetch('http://localhost:8001/summarize', {  method: 'POST',  body: JSON.stringify({    pdf_url: cloudinaryUrl,    summary_type: 'detailed'  })});```## 🎨 Magical Theme System### Color Palette```css:root {  --primary: hsl(45 100% 65%);      /* Hogwarts Gold */  --accent: hsl(270 60% 45%);       /* Mystical Purple */  --background: hsl(220 30% 5%);    /* Deep Night Sky */  --foreground: hsl(45 100% 85%);   /* Golden Text */}```### Animation Examples```css/* Floating upload animation */@keyframes magicalFloat {  0%, 100% { transform: translateY(0px); }  50% { transform: translateY(-8px); }}/* Pulsing AI brain */@keyframes magicalPulse {  0%, 100% { transform: scale(1); opacity: 1; }  50% { transform: scale(1.1); opacity: 0.8; }}```## 📊 API Reference### Express Server Endpoints (Port 5001)```POST /api/pdf/upload         - Upload PDF to CloudinaryGET  /api/pdf/:id            - Retrieve PDF metadataPOST /api/pdf/summarize      - Proxy to AI serverGET  /api/pdf/proxy/:url     - Proxy PDF URLs for CORSGET  /health                 - Health check```### AI Server Endpoints (Port 8001)```POST /summarize              - Generate AI summaryGET  /health                 - Health checkPOST /extract-text           - Extract text from PDF```## 🧪 Development### Project Structure```Wiz-Scholar/├── client/                  # React frontend (Port 3000)│   ├── src/│   │   ├── components/     # Magical UI components│   │   ├── utils/          # PDF processing utilities│   │   └── *.css          # Magical theme styles├── server/                  # Express backend (Port 5001)│   ├── routes/             # API routes│   ├── models/             # MongoDB models│   ├── middlewares/        # Express middlewares│   └── utils/              # Server utilities├── ai_server/              # FastAPI AI service (Port 8001)│   ├── main.py            # FastAPI application│   ├── requirements.txt   # Python dependencies│   └── .env              # AI server configuration├── start-wiz-scholar.sh   # Startup script├── stop-wiz-scholar.sh    # Cleanup script└── ARCHITECTURE_GUIDE.md  # Detailed architecture docs```### Development Workflow1. Run startup script for all servers2. Make changes to any component3. Hot reload works for all three servers4. Use debug panels in UI for troubleshooting5. Check server logs for detailed information### Debugging```bash# Check server statuscurl http://localhost:3000   # React Clientcurl http://localhost:5001/health   # Express Server  curl http://localhost:8001/health   # AI Server# Monitor logstail -f ai_server/ai_server.logtail -f server/express_server.logtail -f client/react_client.log```## 🌟 Why Three Servers?### 1. **Separation of Concerns**- **React Client**: Pure frontend, magical UI experience- **Express Server**: File management, data persistence, API routing- **AI Server**: Dedicated AI processing, scalable Python environment### 2. **Scalability**- Each server can be scaled independently- AI server can be deployed on GPU-enabled instances- Frontend can be served from CDN- Backend can handle multiple AI server instances### 3. **Technology Optimization**- **JavaScript**: Perfect for API server and React UI- **Python**: Ideal for AI/ML processing with rich libraries- **Separate Processes**: Better resource management and fault isolation### 4. **Development Benefits**- Team members can work on different servers independently- Different deployment strategies for each component- Easy to add new AI models or processing servers- Clear debugging and monitoring per service## 🔧 Configuration Guide### MongoDB Setup```bash# Install MongoDB locallybrew install mongodb/brew/mongodb-community# Start MongoDBbrew services start mongodb/brew/mongodb-community# Or use MongoDB Atlas for cloud database```### Cloudinary Setup1. Create account at [cloudinary.com](https://cloudinary.com)2. Get credentials from dashboard3. Create upload preset for unsigned uploads4. Add credentials to environment files### Google Gemini AI Setup1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)2. Create API keys (get multiple for backup)3. Add to `ai_server/.env`4. Enable billing if needed for production## 🚀 Deployment### Production Architecture```┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐│   Vercel/CDN    │───▶│  Railway/Heroku │───▶│  Google Cloud   ││   React Build   │    │  Express Server │    │   AI Server     ││                 │    │                 │    │                 ││ • Static Files  │    │ • API Routes    │    │ • GPU Instance  ││ • Global CDN    │    │ • MongoDB Atlas │    │ • Auto Scaling  │└─────────────────┘    └─────────────────┘    └─────────────────┘```### Deploy Frontend```bashcd clientnpm run build# Deploy to Vercel, Netlify, or any static hosting```### Deploy Backend```bash# Deploy Express server to Railway, Heroku, or similar# Deploy AI server to Google Cloud Run, Railway, or GPU instance```## 🤝 Contributing1. Fork the repository2. Create feature branch: `git checkout -b feature/amazing-feature`3. Follow the magical theme guidelines4. Test with all three servers running5. Commit changes: `git commit -m 'Add amazing magical feature'`6. Push to branch: `git push origin feature/amazing-feature`7. Open Pull Request## 📄 LicenseThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.## 🙏 Acknowledgments- **Google Gemini AI** for powerful language processing- **Cloudinary** for reliable file storage and management- **MongoDB** for flexible document database- **FastAPI** for high-performance Python API framework- **React & Vite** for modern frontend development- **The Wizarding World** for magical inspiration ✨## 📚 Additional Documentation- [ARCHITECTURE_GUIDE.md](ARCHITECTURE_GUIDE.md) - Detailed technical architecture- [Server Configuration Guide](server/README.md) - Express server details- [AI Server Documentation](ai_server/README.md) - FastAPI AI service details- [Client Documentation](client/README.md) - React frontend details---*🧙‍♂️ Built with magical thinking and powered by AI wizardry! ✨***Experience the magic at**: http://localhost:3000
+# 🧙‍♂️ Wiz Scholar – Magical PDF Summarizer ✨
+
+**Wiz Scholar** is an enchanted document analysis platform that transforms PDFs into intelligent summaries using cutting-edge AI technology and a Harry Potter-inspired UI. It features drag-and-drop uploads, magical animations, and intelligent PDF understanding powered by Google Gemini AI.
+
+---
+
+## ✨ Features
+
+- 🎨 **Themed Magical UI** — Mystical interface with Hogwarts-inspired styling
+- 📤 **Smart PDF Upload** — Drag-and-drop with magical float animations
+- 🤖 **AI-Powered Summarization** — Summaries powered by Gemini Pro models
+- 🔍 **Interactive PDF Viewer** — View uploaded files with in-browser preview
+- ☁️ **Secure Cloud Storage** — Uploads managed through Cloudinary
+- ⚡ **Real-time Processing** — Live progress indicators with magical effects
+- 📱 **Responsive Design** — Optimized for desktop and mobile
+- 🏗️ **Three-Server Architecture** — Clear separation of concerns
+
+---
+
+## 🧠 Architecture Overview
+
+┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+│ React Client │───▶ Express Server │───▶ AI Server │
+│ Port: 3000 │ │ Port: 5001 │ │ Port: 8001 │
+│ • UI & Upload │ │ • API Routing │ │ • Gemini AI │
+│ • PDF Viewer │ │ • File Mgmt │ │ • Text Proc. │
+└───────────────┘ └───────────────┘ └───────────────┘
+
+yaml
+Copy
+Edit
+
+---
+
+## 🚀 Quick Start (All-in-One Script)
+
+```bash
+git clone https://github.com/Sainava/Wiz-Scholar.git
+cd Wiz-Scholar
+
+chmod +x start-wiz-scholar.sh
+./start-wiz-scholar.sh
+This starts:
+
+🤖 AI Server (8001)
+
+🚀 Express Server (5001)
+
+⚛️ React Client (3000)
+
+To stop everything:
+
+bash
+Copy
+Edit
+./stop-wiz-scholar.sh
+🛠️ Manual Setup Guide
+1. Prerequisites
+Node.js 18+
+
+Python 3.8+
+
+MongoDB (local or Atlas)
+
+Cloudinary account
+
+Google Gemini API Keys
+
+2. Install Dependencies
+bash
+Copy
+Edit
+# Frontend
+cd client && npm install && cd ..
+
+# Backend
+cd server && npm install && cd ..
+
+# AI Server
+cd ai_server
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd ..
+3. Environment Configuration
+client/.env
+
+ini
+Copy
+Edit
+VITE_SERVER_URL=http://localhost:5001
+VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
+VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
+server/.env
+
+ini
+Copy
+Edit
+MONGODB_URI=mongodb://localhost:27017/wiz-scholar
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+AI_SERVER_URL=http://localhost:8001
+PORT=5001
+CORS_ORIGIN=http://localhost:3000
+ai_server/.env
+
+ini
+Copy
+Edit
+GEMINI_API_KEY_1=your_primary_gemini_key
+GEMINI_API_KEY_2=your_backup_key
+HOST=0.0.0.0
+PORT=8001
+DEBUG=True
+MAX_FILE_SIZE=10485760
+ALLOWED_EXTENSIONS=pdf,txt,docx
+4. Start Servers (Individually)
+bash
+Copy
+Edit
+# Terminal 1: AI Server
+cd ai_server && source venv/bin/activate && python main.py
+
+# Terminal 2: Express Server
+cd server && npm start
+
+# Terminal 3: React Client
+cd client && npm run dev
+🎯 System Flow
+📄 PDF Upload Process
+User uploads PDF via drag-and-drop
+
+React sends file to Express (port 5001)
+
+Express uploads to Cloudinary
+
+Cloudinary URL is stored in MongoDB
+
+React displays PDF in built-in viewer
+
+🧠 AI Summarization Process
+User selects summary type
+
+Express proxies request to AI Server
+
+AI Server:
+
+Downloads PDF
+
+Extracts text
+
+Sends prompt to Gemini
+
+Returns summary to Express
+
+Express sends result to frontend
+
+🌈 Theming & UI
+🪄 Color Palette
+css
+Copy
+Edit
+:root {
+  --primary: hsl(45 100% 65%);     /* Hogwarts Gold */
+  --accent: hsl(270 60% 45%);      /* Mystical Purple */
+  --background: hsl(220 30% 5%);   /* Deep Night Sky */
+  --foreground: hsl(45 100% 85%);  /* Golden Text */
+}
+✨ Animations
+css
+Copy
+Edit
+@keyframes magicalFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes magicalPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+📊 API Reference
+Express Server (localhost:5001)
+Endpoint	Method	Description
+/api/pdf/upload	POST	Upload PDF to Cloudinary
+/api/pdf/:id	GET	Retrieve PDF metadata
+/api/pdf/summarize	POST	Proxy summarization request to AI
+/api/pdf/proxy/:url	GET	CORS-safe PDF fetch proxy
+/health	GET	Health check
+
+AI Server (localhost:8001)
+Endpoint	Method	Description
+/summarize	POST	Generate AI summary (Gemini)
+/extract-text	POST	Extract raw text from PDF
+/health	GET	Health check
+
+🧪 Project Structure
+bash
+Copy
+Edit
+Wiz-Scholar/
+├── client/           # React frontend
+├── server/           # Express backend
+├── ai_server/        # FastAPI AI service
+├── start-wiz-scholar.sh
+├── stop-wiz-scholar.sh
+└── docs/
+    └── ARCHITECTURE_GUIDE.md
+🌍 Deployment
+Frontend
+bash
+Copy
+Edit
+cd client
+npm run build
+# Deploy /dist to Vercel, Netlify, or other CDN
+Backend & AI Server
+Deploy Express server to Railway / Render / Heroku
+
+Deploy AI Server to Google Cloud Run or GPU instance
+
+Use MongoDB Atlas for production DB
+
+Secure all environment variables
+
+🤝 Contributing
+Fork the repository
+
+Create a branch: git checkout -b feature/awesome-feature
+
+Follow the theme guidelines
+
+Test across all 3 servers
+
+Submit a Pull Request
+
+📄 License
+Licensed under the MIT License.
+
+🙏 Acknowledgments
+Google Gemini AI for advanced summarization
+
+Cloudinary for file storage
+
+MongoDB Atlas for document DB
+
+FastAPI for scalable Python APIs
+
+React & Vite for modern frontend tooling
+
+🧙 Built with magical thinking and AI wizardry.
+Visit the enchanted castle: http://localhost:3000
