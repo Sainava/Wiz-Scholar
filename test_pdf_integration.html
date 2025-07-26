@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Upload Test</title>
+</head>
+<body>
+    <h1>PDF Upload Test</h1>
+    
+    <h2>Test 1: Backend Health Check</h2>
+    <button onclick="testBackendHealth()">Test Backend Health</button>
+    <div id="backend-result"></div>
+    
+    <h2>Test 2: AI Server Health Check</h2>
+    <button onclick="testAIHealth()">Test AI Server Health</button>
+    <div id="ai-result"></div>
+    
+    <h2>Test 3: PDF Upload Test</h2>
+    <input type="file" id="pdf-file" accept=".pdf">
+    <button onclick="testPDFUpload()">Test PDF Upload</button>
+    <div id="upload-result"></div>
+
+    <script>
+        async function testBackendHealth() {
+            try {
+                const response = await fetch('http://localhost:5001/api/pdf/health');
+                const data = await response.json();
+                document.getElementById('backend-result').innerHTML = 
+                    `<pre>Status: ${response.status}\n${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('backend-result').innerHTML = 
+                    `<div style="color: red;">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testAIHealth() {
+            try {
+                const response = await fetch('http://localhost:8001/health');
+                const data = await response.json();
+                document.getElementById('ai-result').innerHTML = 
+                    `<pre>Status: ${response.status}\n${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('ai-result').innerHTML = 
+                    `<div style="color: red;">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testPDFUpload() {
+            const fileInput = document.getElementById('pdf-file');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                document.getElementById('upload-result').innerHTML = 
+                    '<div style="color: red;">Please select a PDF file first</div>';
+                return;
+            }
+
+            try {
+                const formData = new FormData();
+                formData.append('pdf', file);
+
+                const response = await fetch('http://localhost:5001/api/pdf/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                document.getElementById('upload-result').innerHTML = 
+                    `<pre>Status: ${response.status}\n${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('upload-result').innerHTML = 
+                    `<div style="color: red;">Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
