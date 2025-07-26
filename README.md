@@ -1,459 +1,589 @@
-# Wiz-Scholar - Full Stack Educational Platform with AI
+# Wiz Scholar - Technical Documentation & Workflow
 
-A comprehensive educational platform built with React frontend, Python AI backend, and enhanced with ML-powered Sorting Hat feature.
+## 🏰 Project Overview
 
-## 🏗️ Project Structure
-
-```
-Wiz-Scholar/
-├── wiz-scholar-landing-page/  # React frontend (Vite + Tailwind)
-├── server/                    # Node.js/Express backend  
-├── ai_server/                 # Python FastAPI AI backend
-├── Sorting_Hat/              # ML model and training data
-├── start-full-stack.bat      # Windows startup script
-├── start-full-stack.ps1      # PowerShell startup script
-└── README.md
-```
-
-## 🚀 Quick Start (One-Command Launch)
-
-> **🎯 Goal**: Get your complete full-stack application running with the ML Sorting Hat in under 5 minutes
-
-### **Prerequisites**
-- **Node.js** (v16 or higher) - [Download here](https://nodejs.org/)
-- **Python** (3.8+) - [Download here](https://python.org/)
-- **Git** - [Download here](https://git-scm.com/)
-
-### **🏁 One-Click Startup**
-
-#### **Windows Users (Batch Script)**
-```batch
-# Simply double-click the startup script or run:
-start-full-stack.bat
-```
-
-#### **Windows Users (PowerShell)**
-```powershell
-# Right-click PowerShell "Run as Administrator" and execute:
-.\start-full-stack.ps1
-```
-
-#### **Manual Startup**
-```bash
-# Navigate to the landing page directory
-cd wiz-scholar-landing-page
-
-# Install dependencies (first time only)
-npm install
-
-# Install Python dependencies for AI server (first time only)
-cd ../ai_server
-pip install -r requirements.txt
-
-# Start both frontend and AI server together
-cd ../wiz-scholar-landing-page
-npm run dev:full
-```
-
-### **🎉 Access Your Application**
-- **Frontend**: http://localhost:5173
-- **AI Server**: http://localhost:8001  
-- **Sorting Hat**: http://localhost:5173/sorting-hat (after login)
-
-## ✨ Features
-
-### 🔮 **Sorting Hat AI** (Fully Integrated)
-- **Interactive 15-question ceremony** powered by Machine Learning
-- **Real-time predictions** with confidence scores
-- **Beautiful UI** with house-themed styling
-- **Trait analysis** (Bravery, Loyalty, Wisdom, Ambition)
-- **Enhanced ML model** with interaction features for accurate sorting
-
-### 🎓 **Educational Platform**
-- **User Authentication** with Firebase
-- **Dashboard** with magical tools
-- **Document Summarizer** (coming soon)
-- **Hogwarts Suite** (coming soon)
-
-## 🔧 Development Scripts
-
-```bash
-# Frontend only
-npm run dev
-
-# Full stack (frontend + AI server)
-npm run dev:full
-
-# AI server only
-npm run server
-
-# Build for production
-npm run build
-```
-```env
-MONGODB_URI=your_mongodb_connection_string_here
-PORT=5001
-NODE_ENV=development
-```
-
-#### **4. Optional: Set Up OpenAI API**
-Create `ai_server/.env` file:
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-AI_MODEL=gpt-3.5-turbo
-HOST=0.0.0.0
-PORT=8001
-DEBUG=True
-```
-
-#### **5. Start All Services**
-```bash
-# Run all services at once (recommended)
-npm run dev
-
-# OR run individually:
-npm run client:dev    # React frontend
-npm run server:dev    # Express backend  
-npm run ai:dev        # FastAPI AI backend
-```
-
-### **✅ Verify Everything Works**
-- **React Frontend**: http://localhost:5173
-- **Express Backend**: http://localhost:5001
-- **Express Health**: http://localhost:5001/api/health
-- **AI Backend**: http://localhost:8001
-- **AI Documentation**: http://localhost:8001/docs
-
-## 🔧 Available Scripts
-
-| Command | Description | What it does |
-|---------|-------------|--------------|
-| `npm run dev` | **Start all services** | Runs React, Express, and FastAPI concurrently |
-| `npm run client:dev` | **React only** | Starts frontend on http://localhost:5173 |
-| `npm run server:dev` | **Express only** | Starts backend on http://localhost:5001 |
-| `npm run ai:dev` | **FastAPI only** | Starts AI server on http://localhost:8001 |
-| `npm run install:all` | **Install everything** | Installs dependencies for all services |
-| `npm run setup:ai` | **Python setup** | Creates virtual environment & installs AI packages |
-| `npm run client:build` | **Build for production** | Creates optimized React build |
-
-## 🌐 API Endpoints
-
-### **Express Backend** (http://localhost:5001)
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | Server status message |
-| `/api/health` | GET | Health check + MongoDB connection status |
-
-### **FastAPI AI Backend** (http://localhost:8001)
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | AI server status |
-| `/health` | GET | AI health check |
-| `/api/query` | POST | Process AI queries |
-| `/api/models` | GET | List available AI models |
-| `/docs` | GET | **Interactive API documentation** |
-
-## 🛠️ Technology Stack
-
-### **Frontend**
-- **React 19** - Modern UI library with latest features
-- **Vite** - Fast build tool and dev server (faster than Create React App)
-- **CSS3** - Modern styling
-
-### **Backend**
-- **Node.js** - JavaScript runtime
-- **Express.js 5** - Web framework
-- **MongoDB Atlas** - Cloud database (free tier)
-- **Mongoose** - Elegant MongoDB object modeling
-
-### **AI Backend**
-- **Python 3** - Programming language
-- **FastAPI** - High-performance web framework for APIs
-- **scikit-learn** - Machine learning library
-- **NLTK** - Natural language processing
-- **OpenAI** - Large language model integration
-- **uvicorn** - ASGI server for FastAPI
-
-### **Development Tools**
-- **concurrently** - Run multiple commands simultaneously
-- **nodemon** - Auto-restart server on changes
-- **dotenv** - Environment variable management
-
-## 🔄 Development Workflow
-
-### **✅ Current Status - Fully Operational**
-1. **✅ Day 1 Complete**: Basic skeleton running
-   - [x] MERN stack project structure
-   - [x] Express server with MongoDB Atlas connection
-   - [x] React frontend with Vite
-   - [x] FastAPI AI backend with virtual environment
-   - [x] Git repository initialized
-   - [x] All services tested and working
-
-### **🎯 Ready for Development**
-Your team can now start building features on this solid foundation!
-
-## 🚨 Troubleshooting
-
-### **Common Issues & Solutions**
-
-#### **MongoDB Connection Issues**
-```bash
-# Error: IP not whitelisted
-# Solution: Add your IP to MongoDB Atlas Network Access
-# Go to Atlas → Network Access → Add IP Address → Add your public IP
-```
-
-#### **Port Already in Use**
-```bash
-# Error: Port 5001 already in use
-# Solution: Kill existing processes
-pkill -f "node.*server.js"
-# Or change port in server/.env: PORT=5002
-```
-
-#### **Python Virtual Environment Issues**
-```bash
-# Error: Virtual environment not found
-# Solution: Recreate it
-cd ai_server
-rm -rf venv
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-#### **Dependencies Not Installing**
-```bash
-# Clear npm cache and reinstall
-npm cache clean --force
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### **Health Check Commands**
-```bash
-# Quick verification that everything is working
-curl http://localhost:5173  # Should return HTML
-curl http://localhost:5001/api/health  # Should show MongoDB status
-curl http://localhost:8001/health  # Should show AI status
-```
-
-## 📁 Project Structure Explained
-
-```
-Wiz-Scholar/
-├── 📁 client/                 # React Frontend (Vite)
-│   ├── src/
-│   │   ├── App.jsx           # Main React component
-│   │   ├── main.jsx          # React entry point
-│   │   └── index.css         # Global styles
-│   ├── package.json          # Frontend dependencies
-│   └── vite.config.js        # Vite configuration
-│
-├── 📁 server/                 # Node.js/Express Backend
-│   ├── server.js             # Main server file
-│   ├── package.json          # Backend dependencies
-│   └── .env                  # Environment variables (MongoDB, etc.)
-│
-├── 📁 ai_server/             # Python FastAPI AI Backend
-│   ├── main.py               # FastAPI application
-│   ├── requirements.txt      # Python dependencies
-│   ├── venv/                 # Python virtual environment
-│   └── .env                  # AI configuration (OpenAI key, etc.)
-│
-├── 📄 package.json           # Root scripts (run all services)
-├── 📄 README.md             # This file
-├── 📄 QUICK_START.md        # Quick setup guide
-├── 📄 MONGODB_SETUP.md      # Detailed MongoDB Atlas setup
-└── 📄 .gitignore            # Git ignore rules
-```
-
-## 🚀 **NEXT STEPS - Day 2 and Beyond**
-
-### **🔧 Immediate Next Steps (Priority Order)**
-
-#### **Step 1: Set Up MongoDB Atlas Database** ⚠️ **REQUIRED**
-Follow the detailed guide in `MONGODB_SETUP.md` to:
-1. Create a free MongoDB Atlas cluster
-2. Set up database user and network access
-3. Get your connection string
-4. Update `server/.env` with your MongoDB URI
-
-**Current Status**: ⚠️ Server runs without database but needs MongoDB for full functionality
-
-#### **Step 2: Set Up OpenAI API (Optional)**
-1. Get API key from [OpenAI Platform](https://platform.openai.com/api-keys)
-2. Add to `ai_server/.env`:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
-3. Test AI endpoints: `http://localhost:8001/docs`
-
-**Current Status**: ⚠️ AI server runs with placeholder responses
-
-#### **Step 3: Create Basic Data Models**
-Create MongoDB schemas for your educational platform:
-```javascript
-// server/models/User.js
-// server/models/Course.js
-// server/models/Lesson.js
-// server/models/Progress.js
-```
-
-#### **Step 4: Build Core API Endpoints**
-Implement CRUD operations:
-- User registration/login
-- Course management
-- Progress tracking
-- AI query processing
-
-#### **Step 5: Enhance Frontend**
-- Create login/signup forms
-- Build course dashboard
-- Add AI chat interface
-- Implement progress tracking UI
-
-### **🗄️ Database Integration Steps**
-
-After setting up MongoDB Atlas (see `MONGODB_SETUP.md`):
-
-1. **Verify Connection**:
-   ```bash
-   npm run server:dev
-   # Look for: "MongoDB connected successfully"
-   ```
-
-2. **Create Your First Model** (`server/models/User.js`):
-   ```javascript
-   const mongoose = require('mongoose');
-   
-   const userSchema = new mongoose.Schema({
-     name: { type: String, required: true },
-     email: { type: String, required: true, unique: true },
-     password: { type: String, required: true },
-     courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
-   }, { timestamps: true });
-   
-   module.exports = mongoose.model('User', userSchema);
-   ```
-
-3. **Create API Routes** (`server/routes/users.js`):
-   ```javascript
-   const express = require('express');
-   const User = require('../models/User');
-   const router = express.Router();
-   
-   router.post('/register', async (req, res) => {
-     // User registration logic
-   });
-   
-   module.exports = router;
-   ```
-
-4. **Test Database Operations**:
-   ```bash
-   curl -X POST http://localhost:5001/api/users/register \
-     -H "Content-Type: application/json" \
-     -d '{"name":"Test User","email":"test@example.com","password":"password123"}'
-   ```
-
-### **🤖 AI Integration Roadmap**
-
-1. **Basic AI Features**:
-   - Question answering
-   - Content summarization
-   - Study plan generation
-
-2. **Advanced AI Features**:
-   - Personalized learning paths
-   - Real-time tutoring
-   - Progress analysis
-
-### **📱 Frontend Development Plan**
-
-1. **Authentication Pages**:
-   - Login/Register forms
-   - Password reset
-   - User profile
-
-2. **Dashboard**:
-   - Course overview
-   - Progress tracking
-   - AI chat interface
-
-3. **Learning Interface**:
-   - Video/text content viewer
-   - Interactive exercises
-   - AI-powered help
-
-### **🚀 Deployment Preparation**
-
-1. **Environment Setup**:
-   - Production MongoDB cluster
-   - Environment variables management
-   - API rate limiting
-
-2. **Hosting Options**:
-   - **Frontend**: Vercel, Netlify
-   - **Backend**: Railway, Render, Heroku
-   - **AI Server**: Railway, Google Cloud Run
-
-## 🤝 Team Development Guidelines
-
-### **Getting Started as a New Team Member**
-1. **Follow the Quick Start guide above** - it should take 5-10 minutes
-2. **Test all services** using the health check URLs
-3. **Read the API documentation** at http://localhost:8001/docs
-4. **Check existing issues** before starting new features
-
-### **Development Best Practices**
-- **Always run `npm run dev`** to start all services during development
-- **Check health endpoints** before reporting bugs
-- **Use meaningful commit messages** (see existing commits for examples)
-- **Test locally** before pushing to main branch
-
-### **Adding New Features**
-1. **Backend API**: Add routes in `server/`
-2. **Frontend UI**: Add components in `client/src/`
-3. **AI Features**: Add endpoints in `ai_server/main.py`
-4. **Database**: Add models in `server/models/` (create this folder as needed)
-
-## 📝 Notes for Team
-
-- **Environment files** (`.env`) are gitignored for security
-- **Virtual environments** isolate Python dependencies
-- **Concurrently** allows running all services with one command
-- **FastAPI** provides automatic interactive API documentation
-- **Vite** gives faster development experience than Create React App
-- **MongoDB Atlas** provides free cloud database (no local MongoDB needed)
-
-## 🚀 Production Deployment
-
-### **Environment Setup for Production**
-- Set up production MongoDB cluster in Atlas
-- Configure environment variables for production
-- Set up proper API rate limiting
-
-### **Recommended Hosting**
-- **Frontend**: Vercel, Netlify (free tiers available)
-- **Backend**: Railway, Render, Heroku
-- **AI Server**: Railway, Google Cloud Run
-
-## 📄 License
-
-This project is licensed under the MIT License.
+**Wiz Scholar** is a Harry Potter-themed educational platform that combines artificial intelligence, machine learning, and modern web technologies to create an immersive learning experience. The platform features a Sorting Hat AI for personalized user categorization, PDF document summarization, and a comprehensive Hogwarts Suite of educational tools.
 
 ---
 
-## 🎯 Quick Links for Team
+## 🛠️ Tech Stack
 
-| Resource | URL | Description |
-|----------|-----|-------------|
-| **Main App** | http://localhost:5173 | React frontend |
-| **API Health** | http://localhost:5001/api/health | Backend + DB status |
-| **AI Docs** | http://localhost:8001/docs | Interactive AI API docs |
-| **MongoDB Setup** | [MONGODB_SETUP.md](./MONGODB_SETUP.md) | Detailed database setup |
-| **Quick Start** | [QUICK_START.md](./QUICK_START.md) | Fast setup guide |
+### Frontend
+- **Framework**: React 18 with Vite
+- **UI Components**: Radix UI + Shadcn/ui
+- **Styling**: Tailwind CSS with custom house themes
+- **Authentication**: Firebase Authentication
+- **Routing**: React Router DOM
+- **State Management**: React Context API
+- **Build Tool**: Vite (Hot Module Replacement, Fast Builds)
 
-**Happy coding! 🚀**
+### Backend
+- **API Server**: Express.js (Node.js)
+- **Database**: MongoDB with Mongoose ODM
+- **File Storage**: Cloudinary for PDF management
+- **PDF Processing**: pdf-parse library
+- **Cross-Origin**: CORS enabled for frontend communication
+- **Environment**: dotenv for configuration management
+
+### AI/ML Services
+- **Framework**: FastAPI (Python)
+- **Machine Learning**: scikit-learn for Sorting Hat model
+- **Natural Language**: NLTK for text processing
+- **AI Integration**: OpenAI GPT for intelligent responses
+- **Model Storage**: joblib for ML model serialization
+- **Data Processing**: pandas, numpy for data manipulation
+
+### Infrastructure & Deployment
+- **Development Server**: Vite dev server (Frontend)
+- **API Server**: Express.js on port 5001
+- **AI Server**: FastAPI with uvicorn on port 8001
+- **Database**: MongoDB Atlas (Cloud)
+- **File Storage**: Cloudinary CDN
+- **Environment**: Multi-service architecture
+
+---
+
+## 🏗️ Project Architecture & Workflow
+
+### Directory Structure
+```
+Wiz-Scholar-Srujal/
+├── wiz-scholar-landing-page/     # React Frontend
+│   ├── src/
+│   │   ├── components/           # Reusable UI components
+│   │   ├── pages/               # Route components
+│   │   ├── hooks/               # Custom React hooks
+│   │   ├── lib/                 # Utility functions
+│   │   └── assets/              # Static images/files
+│   ├── public/                  # Static assets
+│   └── vite.config.js          # Vite configuration
+├── server/                      # Express.js Backend
+│   ├── routes/                  # API route handlers
+│   ├── utils/                   # Backend utilities
+│   ├── middlewares/             # Express middlewares
+│   └── server.js               # Main server file
+├── ai_server/                   # FastAPI AI Service
+│   ├── main.py                 # AI server entry point
+│   └── requirements.txt        # Python dependencies
+└── Sorting_Hat/                # ML Model & Data
+    ├── enhanced_sorting_hat_model.joblib
+    ├── Question_Bank.csv
+    └── train_enhanced.py
+```
+
+### Service Communication Flow
+
+```mermaid
+graph TB
+    A[React Frontend :8080] --> B[Express Backend :5001]
+    B --> C[FastAPI AI Server :8001]
+    B --> D[MongoDB Atlas]
+    B --> E[Cloudinary CDN]
+    C --> F[ML Models]
+    C --> G[OpenAI API]
+    A --> H[Firebase Auth]
+```
+
+### Request Lifecycle
+
+1. **User Interaction**: User interacts with React frontend
+2. **Authentication**: Firebase handles user authentication
+3. **API Requests**: Frontend sends requests to Express backend
+4. **Data Processing**: Backend processes requests, handles file uploads
+5. **AI Processing**: Backend forwards AI requests to FastAPI server
+6. **ML Inference**: AI server runs Sorting Hat model or PDF processing
+7. **Response Chain**: Results flow back through the stack to the user
+
+---
+
+## 🎓 Sorting Hat ML Model
+
+### Overview
+The Sorting Hat is a sophisticated machine learning system that assigns users to one of the four Hogwarts houses based on their personality traits and responses to carefully crafted questions.
+
+### Technical Implementation
+
+#### Model Architecture
+- **Algorithm**: Enhanced Random Forest Classifier
+- **Fallback**: Decision Tree Classifier for basic functionality
+- **Training Data**: 2000+ synthetic samples based on house characteristics
+- **Features**: 9 personality dimensions per house
+
+#### House Characteristics Matrix
+```python
+house_profiles = {
+    'Gryffindor': {
+        'bravery_score': (7, 10),      # High courage and valor
+        'wisdom_score': (4, 8),        # Moderate wisdom
+        'ambition_score': (5, 9),      # Strong drive
+        'loyalty_score': (6, 9),       # High loyalty to ideals
+        'leadership': (6, 10),         # Natural leadership
+        'impulsiveness': (6, 9),       # Quick decision making
+        'justice_oriented': (7, 10),   # Strong moral compass
+        'risk_taking': (7, 10),        # High risk tolerance
+        'honor_focused': (7, 10),      # Values honor highly
+    },
+    'Hufflepuff': {
+        'loyalty_score': (8, 10),      # PRIMARY: Highest loyalty
+        'justice_oriented': (6, 9),    # Strong sense of fairness
+        'impulsiveness': (2, 5),       # More thoughtful/patient
+        'risk_taking': (3, 6),         # More cautious approach
+        # ... other traits
+    },
+    'Ravenclaw': {
+        'wisdom_score': (8, 10),       # PRIMARY: Highest intelligence
+        'ambition_score': (6, 9),      # Knowledge-focused ambition
+        'creativity': (7, 10),         # High creative thinking
+        'curiosity': (8, 10),          # Strong desire to learn
+        # ... other traits
+    },
+    'Slytherin': {
+        'ambition_score': (8, 10),     # PRIMARY: Highest ambition
+        'leadership': (7, 10),         # Strong leadership drive
+        'strategic_thinking': (7, 10), # Cunning and planning
+        'resourcefulness': (7, 10),    # Finding creative solutions
+        # ... other traits
+    }
+}
+```
+
+#### Question Bank System
+- **Total Questions**: 50+ carefully crafted questions
+- **Question Types**: Scenario-based, preference-based, ethical dilemmas
+- **Scoring System**: Multi-dimensional trait scoring
+- **Adaptive Logic**: Questions selected based on previous responses
+
+#### Model Training Process
+1. **Data Generation**: Synthetic data based on psychological profiles
+2. **Feature Engineering**: Convert responses to numerical trait scores
+3. **Model Training**: Random Forest with cross-validation
+4. **Validation**: Accuracy testing and confusion matrix analysis
+5. **Serialization**: Save model using joblib for production use
+
+#### API Integration
+```python
+# FastAPI endpoint structure
+@app.post("/api/sorting-hat/sort")
+async def sort_user(responses: SortingRequest):
+    # Process user responses
+    trait_scores = calculate_trait_scores(responses.answers)
+    
+    # Run ML model inference
+    prediction = sorting_hat_model.predict([trait_scores])
+    probabilities = sorting_hat_model.predict_proba([trait_scores])
+    
+    # Return house assignment with confidence
+    return {
+        "house": prediction[0],
+        "confidence": max(probabilities[0]),
+        "house_probabilities": dict(zip(houses, probabilities[0]))
+    }
+```
+
+---
+
+## 📄 PDF Summarizer System
+
+### Architecture Overview
+The PDF Summarizer is a comprehensive document processing pipeline that handles PDF upload, text extraction, and AI-powered summarization.
+
+### Technical Implementation
+
+#### Component Stack
+1. **Frontend Upload**: React drag-and-drop interface with progress tracking
+2. **Express Middleware**: Multer for multipart form handling
+3. **Cloud Storage**: Cloudinary for PDF storage and CDN delivery
+4. **Text Extraction**: pdf-parse library for content extraction
+5. **AI Processing**: OpenAI GPT integration for intelligent summarization
+
+#### Processing Pipeline
+```javascript
+// Complete PDF processing workflow
+const processPDF = async (file) => {
+    // 1. Upload to Cloudinary
+    const cloudinaryResult = await uploadPDFToCloudinary(fileBuffer, fileName);
+    
+    // 2. Extract text content
+    const extractedText = await extractTextFromPDF(fileBuffer);
+    
+    // 3. Send to AI server for summarization
+    const summary = await summarizeWithGemini(extractedText, summaryType);
+    
+    // 4. Return structured response
+    return {
+        pdf_url: cloudinaryResult.secure_url,
+        extracted_text: extractedText,
+        summary: summary,
+        metadata: {
+            pages: extractedText.split('\f').length,
+            word_count: extractedText.split(' ').length,
+            processing_time: Date.now() - startTime
+        }
+    };
+};
+```
+
+#### Cloudinary Integration
+```javascript
+const uploadPDFToCloudinary = async (fileBuffer, fileName) => {
+    return new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream({
+            resource_type: 'raw',           // Handle non-image files
+            folder: 'wiz-scholar/pdfs',     // Organized storage
+            public_id: `pdf_${Date.now()}_${fileName}`,
+            use_filename: true,
+            content_type: 'application/pdf',
+            disposition: 'inline',          // Allow browser viewing
+        }, (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+        }).end(fileBuffer);
+    });
+};
+```
+
+#### AI Summarization Features
+- **Multiple Summary Types**: Academic, Brief, Detailed, Bullet Points
+- **Context Preservation**: Maintains document structure and key concepts
+- **Question Answering**: Interactive Q&A based on document content
+- **Custom Prompts**: Tailored prompts for educational content
+
+#### Frontend Integration
+```jsx
+const PDFSummarizerPanel = () => {
+    const [file, setFile] = useState(null);
+    const [summary, setSummary] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleFileUpload = async (selectedFile) => {
+        const formData = new FormData();
+        formData.append('pdf', selectedFile);
+        formData.append('summary_type', summaryType);
+
+        const response = await fetch('/api/upload-pdf', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        setSummary(result);
+    };
+
+    // Drag-and-drop, progress tracking, error handling
+    return (
+        <div className="pdf-summarizer">
+            {/* Upload interface, progress bar, results display */}
+        </div>
+    );
+};
+```
+
+---
+
+## 🏰 Hogwarts Suite System
+
+### Overview
+The Hogwarts Suite is a comprehensive collection of educational tools designed with Harry Potter theming, providing students with various utilities for academic success.
+
+### House-Based Theming System
+
+#### Dynamic Theme Implementation
+```javascript
+// houseThemes.js - Centralized theme management
+export const houseThemes = {
+    gryffindor: {
+        primary: '#D4AF37',      // Gold
+        secondary: '#DC143C',     // Crimson
+        gradient: 'from-red-600 via-yellow-500 to-red-700',
+        bgGradient: 'from-red-900/20 via-yellow-900/10 to-red-900/20',
+        textPrimary: 'text-yellow-400',
+        textSecondary: 'text-red-300',
+        accent: 'border-yellow-400',
+        house: 'Gryffindor',
+        traits: ['Brave', 'Daring', 'Chivalrous', 'Courageous']
+    },
+    hufflepuff: {
+        primary: '#F0C040',      // Yellow
+        secondary: '#4A4A4A',     // Charcoal
+        gradient: 'from-yellow-600 via-yellow-400 to-amber-600',
+        bgGradient: 'from-yellow-900/20 via-amber-900/10 to-yellow-900/20',
+        textPrimary: 'text-yellow-300',
+        textSecondary: 'text-amber-200',
+        accent: 'border-yellow-400',
+        house: 'Hufflepuff',
+        traits: ['Loyal', 'Patient', 'Fair', 'Hard-working']
+    },
+    // ... Ravenclaw and Slytherin themes
+};
+```
+
+#### Context-Aware Theming
+```jsx
+// AuthContext integration with house theming
+const AuthContext = () => {
+    const [userHouse, setUserHouse] = useState(null);
+    
+    // Load user's house from Firebase
+    useEffect(() => {
+        if (user) {
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (userDoc.exists()) {
+                setUserHouse(userDoc.data().house);
+            }
+        }
+    }, [user]);
+
+    // Apply house-specific theming throughout app
+    const currentTheme = getHouseTheme(userHouse);
+    
+    return (
+        <AuthContext.Provider value={{
+            user, userHouse, currentTheme,
+            handleCompleteSorting: (house) => {
+                setUserHouse(house);
+                // Save to Firebase
+                updateDoc(doc(db, 'users', user.uid), { house });
+            }
+        }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+```
+
+### Features Dashboard
+```jsx
+const FeaturesSection = () => {
+    const { userHouse, currentTheme } = useAuth();
+    
+    return (
+        <div className={`min-h-screen bg-gradient-to-br ${currentTheme.bgGradient}`}>
+            {/* Dynamic background based on user's house */}
+            
+            <div className="personalized-header">
+                <h1 className={currentTheme.textPrimary}>
+                    Welcome to {currentTheme.house} House, {user.displayName}!
+                </h1>
+                <div className={`house-traits ${currentTheme.accent}`}>
+                    {currentTheme.traits.map(trait => (
+                        <span key={trait} className={currentTheme.textSecondary}>
+                            {trait}
+                        </span>
+                    ))}
+                </div>
+            </div>
+            
+            {/* Feature cards with house-themed styling */}
+            <div className="features-grid">
+                {features.map(feature => (
+                    <FeatureCard 
+                        key={feature.title}
+                        {...feature}
+                        theme={currentTheme}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+```
+
+### Educational Tools Collection
+
+#### Current Tools
+1. **Sorting Hat AI**: Personality-based house assignment
+2. **Document Summarizer**: PDF processing and AI summarization
+3. **Interactive Dashboard**: Personalized learning environment
+4. **Progress Tracking**: User journey and achievement system
+
+#### Planned Extensions
+- **Spell Checker**: Grammar and writing assistance
+- **Potion Calculator**: Mathematical computation tools
+- **Study Planner**: Academic scheduling system
+- **Quiz Generator**: Interactive learning assessments
+
+---
+
+## 🔄 Development Workflow
+
+### Local Development Setup
+```bash
+# 1. Frontend Development
+cd wiz-scholar-landing-page
+npm install
+npm run dev              # Starts Vite dev server on :8080
+
+# 2. Backend API Server
+cd server
+npm install
+npm start               # Starts Express server on :5001
+
+# 3. AI/ML Server
+cd ai_server
+pip install -r requirements.txt
+python main.py          # Starts FastAPI server on :8001
+```
+
+### Environment Configuration
+```properties
+# .env configuration
+MONGODB_URI=mongodb+srv://...
+PORT=5001
+NODE_ENV=development
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# AI Server Configuration
+AI_SERVER_URL=http://localhost:8001
+OPENAI_API_KEY=your_openai_key
+```
+
+### Build & Deployment Process
+```bash
+# Frontend Production Build
+cd wiz-scholar-landing-page
+npm run build           # Creates dist/ folder with optimized assets
+
+# Backend Production Deployment
+cd server
+npm start              # Production Express server
+
+# AI Server Production
+cd ai_server
+uvicorn main:app --host 0.0.0.0 --port 8001
+```
+
+---
+
+## 🔐 Security & Authentication
+
+### Firebase Authentication
+- **Providers**: Email/Password, Google OAuth
+- **Session Management**: Persistent login with Firebase tokens
+- **User Profiles**: Extended user data in Firestore
+- **House Assignment**: Secure storage of sorting results
+
+### Data Protection
+- **API Security**: CORS configuration for allowed origins
+- **File Upload**: Secure PDF handling with size limits
+- **Environment Variables**: Sensitive data protection
+- **Input Validation**: Sanitization of user inputs
+
+---
+
+## 📊 Performance Optimizations
+
+### Frontend Optimizations
+- **Vite Build**: Tree shaking and code splitting
+- **Lazy Loading**: Route-based code splitting
+- **Asset Optimization**: Image compression and CDN delivery
+- **Caching**: Browser caching for static assets
+
+### Backend Optimizations
+- **Database**: MongoDB indexing for fast queries
+- **File Storage**: Cloudinary CDN for global delivery
+- **API Caching**: Response caching for frequently accessed data
+- **Connection Pooling**: Database connection optimization
+
+### AI/ML Optimizations
+- **Model Caching**: Pre-loaded models in memory
+- **Batch Processing**: Efficient inference for multiple requests
+- **Response Caching**: Cache common AI responses
+- **Async Processing**: Non-blocking AI operations
+
+---
+
+## 🔮 Future Enhancements
+
+### Planned Features
+1. **Advanced Analytics**: Learning progress tracking
+2. **Social Features**: House-based communities
+3. **Mobile App**: React Native companion app
+4. **Voice Integration**: Voice-activated sorting hat
+5. **Gamification**: Points, badges, and achievements
+6. **Multi-language**: International wizard support
+
+### Technical Improvements
+1. **Microservices**: Service decomposition for scalability
+2. **GraphQL**: Advanced API query capabilities
+3. **Real-time**: WebSocket integration for live features
+4. **Testing**: Comprehensive test coverage
+5. **CI/CD**: Automated deployment pipeline
+6. **Monitoring**: Application performance monitoring
+
+---
+
+## 📚 API Documentation
+
+### Sorting Hat Endpoints
+```
+POST /api/sorting-hat/questions
+- Get next question based on current responses
+- Body: { responses: Array<{questionId, answer}> }
+
+POST /api/sorting-hat/sort
+- Complete sorting process and get house assignment
+- Body: { responses: Array<{questionId, answer}> }
+
+GET /api/sorting-hat/houses
+- Get information about all Hogwarts houses
+```
+
+### PDF Processing Endpoints
+```
+POST /api/upload-pdf
+- Upload and process PDF document
+- Form Data: { pdf: File, summary_type: String }
+
+POST /api/summarize-pdf-url
+- Summarize PDF from URL
+- Body: { pdf_url: String, summary_type: String }
+
+POST /api/ask-pdf-question
+- Ask question about uploaded PDF
+- Body: { pdf_url: String, question: String }
+```
+
+### Authentication Endpoints
+```
+POST /api/auth/register
+- Register new user account
+- Body: { email: String, password: String, displayName: String }
+
+POST /api/auth/login
+- User login authentication
+- Body: { email: String, password: String }
+
+GET /api/user/profile
+- Get user profile with house information
+- Headers: { Authorization: Bearer token }
+```
+
+---
+
+## 🧪 Testing Strategy
+
+### Frontend Testing
+- **Unit Tests**: Component testing with React Testing Library
+- **Integration Tests**: User interaction flows
+- **E2E Tests**: Complete user journey testing
+- **Visual Testing**: Component screenshot comparison
+
+### Backend Testing
+- **Unit Tests**: Route handler and utility function tests
+- **Integration Tests**: Database and external API testing
+- **Load Testing**: Performance under high traffic
+- **Security Testing**: Vulnerability assessment
+
+### AI/ML Testing
+- **Model Validation**: Accuracy and precision metrics
+- **Data Testing**: Training data quality assurance
+- **Performance Testing**: Inference speed optimization
+- **Bias Testing**: Fairness across different user groups
+
+---
+
+This comprehensive documentation provides a complete overview of the Wiz Scholar project, covering all major components, technical decisions, and implementation details. The system demonstrates a sophisticated integration of modern web technologies with AI/ML capabilities, all wrapped in an engaging Harry Potter-themed educational experience.
