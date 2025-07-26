@@ -1,0 +1,57 @@
+Question ID,Question Text,Answer Option,Gryffindor,Hufflepuff,Ravenclaw,Slytherin
+Q01,Which of the following would you most hate for someone to call you?,Ordinary,0,0,1,2
+,,Ignorant,0,0,2,0
+,,Cowardly,2,1,0,0
+,,Selfish,1,2,0,0
+Q02,You enter an enchanted garden. What would you be most curious to examine first?,The silver-leafed tree bearing golden apples,2,1,0,1
+,,The fat red toadstools that appear to be talking to each other,0,2,1,0
+,,"The bubbling pool, in the depths of which something luminous is swirling",0,0,1,2
+,,The statue of an old wizard with a strangely twinkling eye,1,0,2,0
+Q03,A troll has gone berserk in the Headmaster's study. It is about to smash several irreplaceable items. In which order would you rescue them?,"Cure for dragon pox, then student records, then a book of strange runes",1,2,0,0
+,,"Student records, then the book of runes, then the cure for dragon pox",2,0,1,1
+,,"The book of strange runes, then the cure for dragon pox, then student records",0,1,2,1
+,,"Student records, then the cure for dragon pox, then the book of runes",1,2,0,1
+Q04,How would you like to be known to history?,The Wise,0,0,2,1
+,,The Good,1,2,0,0
+,,The Great,0,0,1,2
+,,The Bold,2,1,0,0
+Q05,Dawn or Dusk?,Dawn,2,1,0,0
+,,Dusk,0,0,2,1
+Q06,Forest or River?,Forest,0,2,1,0
+,,River,1,0,0,2
+Q07,You and two friends must cross a bridge guarded by a troll who insists on fighting one of you. What do you do?,Volunteer to fight yourself.,2,1,0,0
+,,Suggest drawing lots to decide who will fight.,0,2,1,0
+,,Attempt to confuse the troll into letting you all pass without a fight.,0,0,2,1
+,,Suggest that all three of you should fight together.,1,0,0,2
+Q08,Which path tempts you most?,"The wide, sunny, grassy lane",1,2,0,0
+,,"The narrow, dark, lantern-lit alley",0,0,1,2
+,,"The twisting, leaf-strewn path through woods",1,1,2,0
+,,The cobbled street lined with ancient buildings,2,0,1,0
+Q09,"Given the choice, would you rather invent a potion that would guarantee you:",Love?,0,2,1,0
+,,Glory?,2,0,0,1
+,,Wisdom?,0,1,2,0
+,,Power?,0,0,1,2
+Q10,"After you have died, what would you most like people to do when they hear your name?","Miss you, but smile.",1,2,0,0
+,,Ask for more stories about your adventures.,2,0,0,1
+,,Think with admiration of your achievements.,0,0,1,2
+,,I don't care what people think of me after I'm dead; it's what they think while I'm alive that counts.,0,0,1,2
+Q11,You find a locked chest. Which key do you try?,"A simple, tarnished key that looks trustworthy.",0,2,1,0
+,,"A golden, ornate key that seems to promise riches.",1,0,0,2
+,,"A silver, intricate key that seems to hold a secret.",0,0,2,1
+,,A heavy iron key that feels like a challenge to turn.,2,1,0,0
+Q12,A classmate has a magical illness and the only cure is a single leaf from a dangerous plant in the Forbidden Forest. What is your first instinct?,Go into the forest yourself to get the leaf; it's the right thing to do.,2,1,0,0
+,,Organize a group of skilled friends to go together; it's safer for everyone.,1,2,0,0
+,,Research the plant and the forest's dangers to find the most logical and efficient way to retrieve the leaf.,0,0,2,1
+,,"Find a way to acquire the leaf through clever means, perhaps by trading or creating a distraction.",0,0,1,2
+Q13,Which quote resonates most with you?,"""Fortune favors the bold.""",2,0,0,1
+,,"""The ends justify the means.""",0,0,1,2
+,,"""Do what is right, not what is easy.""",2,1,0,0
+,,"""A little kindness goes a long way.""",0,2,1,0
+Q14,What kind of power would you rather have?,The power to read minds.,0,0,2,1
+,,The power of invisibility.,2,1,0,1
+,,The power to change the past.,0,1,0,2
+,,The power to speak to animals.,0,2,1,0
+Q15,(HATSTALL TIE-BREAKER) The Sorting Hat is struggling to place you. Which House do you ask it to choose?,Gryffindor,2,0,0,0
+,,Hufflepuff,0,2,0,0
+,,Ravenclaw,0,0,2,0
+,,Slytherin,0,0,0,2

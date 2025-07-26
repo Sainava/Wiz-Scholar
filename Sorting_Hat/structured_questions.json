@@ -1,0 +1,596 @@
+[
+  {
+    "id": "Q01",
+    "text": "Which of the following would you most hate for someone to call you?",
+    "options": [
+      {
+        "text": "Ordinary",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "Ignorant",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Cowardly",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Selfish",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q02",
+    "text": "You enter an enchanted garden. What would you be most curious to examine first?",
+    "options": [
+      {
+        "text": "The silver-leafed tree bearing golden apples",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "The fat red toadstools that appear to be talking to each other",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "The bubbling pool, in the depths of which something luminous is swirling",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "The statue of an old wizard with a strangely twinkling eye",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q03",
+    "text": "A troll has gone berserk in the Headmaster's study. It is about to smash several irreplaceable items. In which order would you rescue them?",
+    "options": [
+      {
+        "text": "Cure for dragon pox, then student records, then a book of strange runes",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Student records, then the book of runes, then the cure for dragon pox",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "The book of strange runes, then the cure for dragon pox, then student records",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 1,
+          "Ravenclaw": 2,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "Student records, then the cure for dragon pox, then the book of runes",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q04",
+    "text": "How would you like to be known to history?",
+    "options": [
+      {
+        "text": "The Wise",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "The Good",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "The Great",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "The Bold",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q05",
+    "text": "Dawn or Dusk?",
+    "options": [
+      {
+        "text": "Dawn",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Dusk",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q06",
+    "text": "Forest or River?",
+    "options": [
+      {
+        "text": "Forest",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "River",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q07",
+    "text": "You and two friends must cross a bridge guarded by a troll who insists on fighting one of you. What do you do?",
+    "options": [
+      {
+        "text": "Volunteer to fight yourself.",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Suggest drawing lots to decide who will fight.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Attempt to confuse the troll into letting you all pass without a fight.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "Suggest that all three of you should fight together.",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q08",
+    "text": "Which path tempts you most?",
+    "options": [
+      {
+        "text": "The wide, sunny, grassy lane",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "The narrow, dark, lantern-lit alley",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "The twisting, leaf-strewn path through woods",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 1,
+          "Ravenclaw": 2,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "The cobbled street lined with ancient buildings",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q09",
+    "text": "Given the choice, would you rather invent a potion that would guarantee you:",
+    "options": [
+      {
+        "text": "Love?",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Glory?",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "Wisdom?",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 1,
+          "Ravenclaw": 2,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Power?",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q10",
+    "text": "After you have died, what would you most like people to do when they hear your name?",
+    "options": [
+      {
+        "text": "Miss you, but smile.",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Ask for more stories about your adventures.",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "Think with admiration of your achievements.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "I don't care what people think of me after I'm dead; it's what they think while I'm alive that counts.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q11",
+    "text": "You find a locked chest. Which key do you try?",
+    "options": [
+      {
+        "text": "A simple, tarnished key that looks trustworthy.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "A golden, ornate key that seems to promise riches.",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "A silver, intricate key that seems to hold a secret.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "A heavy iron key that feels like a challenge to turn.",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q12",
+    "text": "A classmate has a magical illness and the only cure is a single leaf from a dangerous plant in the Forbidden Forest. What is your first instinct?",
+    "options": [
+      {
+        "text": "Go into the forest yourself to get the leaf; it's the right thing to do.",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Organize a group of skilled friends to go together; it's safer for everyone.",
+        "scores": {
+          "Gryffindor": 1,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Research the plant and the forest's dangers to find the most logical and efficient way to retrieve the leaf.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "Find a way to acquire the leaf through clever means, perhaps by trading or creating a distraction.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q13",
+    "text": "Which quote resonates most with you?",
+    "options": [
+      {
+        "text": "\"Fortune favors the bold.\"",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "\"The ends justify the means.\"",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 1,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "\"Do what is right, not what is easy.\"",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "\"A little kindness goes a long way.\"",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q14",
+    "text": "What kind of power would you rather have?",
+    "options": [
+      {
+        "text": "The power to read minds.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "The power of invisibility.",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 1
+        }
+      },
+      {
+        "text": "The power to change the past.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 1,
+          "Ravenclaw": 0,
+          "Slytherin": 2
+        }
+      },
+      {
+        "text": "The power to speak to animals.",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 1,
+          "Slytherin": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "Q15",
+    "text": "(HATSTALL TIE-BREAKER) The Sorting Hat is struggling to place you. Which House do you ask it to choose?",
+    "options": [
+      {
+        "text": "Gryffindor",
+        "scores": {
+          "Gryffindor": 2,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Hufflepuff",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 2,
+          "Ravenclaw": 0,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Ravenclaw",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 2,
+          "Slytherin": 0
+        }
+      },
+      {
+        "text": "Slytherin",
+        "scores": {
+          "Gryffindor": 0,
+          "Hufflepuff": 0,
+          "Ravenclaw": 0,
+          "Slytherin": 2
+        }
+      }
+    ]
+  }
+]

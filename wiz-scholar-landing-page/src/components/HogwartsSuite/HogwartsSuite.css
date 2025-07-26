@@ -1,0 +1,1622 @@
+/* === Hogwarts Suite Global Color Palette === */
+:root {
+  /* Primary */
+  --hogwarts-gold: hsl(45, 100%, 65%);
+  --hogwarts-gold-glow: hsl(45, 100%, 75%);
+  --hogwarts-gold-foreground: hsl(220, 30%, 5%);
+  --hogwarts-gold-light: hsl(45, 100%, 85%);
+  --hogwarts-gold-card-fg: hsl(45, 100%, 90%);
+  --hogwarts-gold-card-fg-strong: hsl(45, 100%, 95%);
+
+  --mystical-purple: hsl(270, 60%, 45%);
+  --mystical-purple-fg: hsl(45, 100%, 95%);
+
+  --house-blue: hsl(235, 60%, 25%);
+  --house-blue-fg: hsl(45, 100%, 90%);
+
+  /* Backgrounds */
+  --night-sky: hsl(220, 30%, 5%);
+  --enchanted-card: hsl(235, 25%, 8%);
+  --enchanted-card-border: hsl(235, 25%, 15%);
+  --enchanted-card-fg: hsl(45, 100%, 90%);
+  --enchanted-card-fg-strong: hsl(45, 100%, 95%);
+
+  /* Utility */
+  --muted-main: hsl(235, 20%, 15%);
+  --muted-fg: hsl(220, 15%, 65%);
+  --destructive-main: hsl(0, 75%, 55%);
+  --destructive-fg: hsl(45, 100%, 95%);
+}
+
+/* === Base Styles === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, .hogwarts-suite {
+  min-height: 100vh;
+  background: var(--night-sky);
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--hogwarts-gold-card-fg);
+}
+
+/* === NAVBAR === */
+.hogwarts-navbar {
+  background: rgba(35, 39, 47, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1.5px solid var(--enchanted-card-border);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suite-title {
+  color: var(--hogwarts-gold);
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-shadow: 0 2px 8px var(--night-sky);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  background: var(--enchanted-card);
+  border: 2px solid var(--enchanted-card-border);
+  color: var(--hogwarts-gold-card-fg);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  border-color: var(--hogwarts-gold);
+  box-shadow: 0 2px 8px var(--hogwarts-gold-glow);
+}
+
+/* === MAIN CONTENT === */
+.suite-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+/* === TOOLS LIBRARY === */
+.tools-library {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--night-sky);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px var(--night-sky);
+}
+
+.tools-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tools-header h2 {
+  color: var(--hogwarts-gold);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px var(--night-sky);
+}
+
+.tools-header p {
+  color: var(--hogwarts-gold-light);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tools-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+}
+
+.search-input {
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--enchanted-card-border);
+  border-radius: 8px;
+  background: var(--enchanted-card);
+  color: var(--enchanted-card-fg);
+  font-size: 1rem;
+  width: 280px;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--hogwarts-gold);
+}
+
+.search-input::placeholder {
+  color: var(--muted-fg);
+}
+
+.category-filter {
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--enchanted-card-border);
+  border-radius: 8px;
+  background: var(--enchanted-card);
+  color: var(--enchanted-card-fg);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.category-filter:focus {
+  outline: none;
+  border-color: var(--hogwarts-gold);
+}
+
+.category-filter option {
+  background: var(--enchanted-card);
+  color: var(--enchanted-card-fg);
+}
+
+/* CATEGORY TABS */
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding: 1rem 0;
+}
+
+.category-tab {
+  background: var(--enchanted-card);
+  color: var(--enchanted-card-fg);
+  border: 1px solid var(--enchanted-card-border);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.category-tab.active,
+.category-tab:hover {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  border-color: var(--hogwarts-gold);
+}
+
+/* TOOLS GRID */
+.tools-cards-grid,
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.tool-card {
+  background: var(--enchanted-card);
+  border: 1.5px solid var(--enchanted-card-border);
+  border-radius: 16px;
+  padding: 1.8rem 1.8rem 1.5rem 1.8rem;
+  box-shadow: 0 2px 16px var(--night-sky);
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  min-height: 160px;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 32px var(--hogwarts-gold-glow);
+  border-color: var(--hogwarts-gold);
+}
+
+.tool-logo-section {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--enchanted-card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--enchanted-card-border);
+}
+
+.tool-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.tool-logo-fallback {
+  color: var(--hogwarts-gold);
+  font-weight: 700;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.tool-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tool-name {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tool-name a {
+  color: var(--hogwarts-gold-card-fg);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.tool-name a:hover {
+  color: var(--hogwarts-gold);
+}
+
+.tool-category {
+  background: var(--mystical-purple);
+  color: var(--mystical-purple-fg);
+  padding: 0.3rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+  margin-bottom: 0.4rem;
+}
+
+.tool-desc {
+  color: var(--enchanted-card-fg);
+  font-size: 0.93rem;
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tool-link {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  text-decoration: none;
+  padding: 0.7rem 1.3rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.2s;
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.8rem;
+  box-shadow: 0 2px 8px var(--hogwarts-gold-glow);
+}
+
+.tool-link:hover {
+  background: var(--hogwarts-gold-glow);
+  color: var(--hogwarts-gold-foreground);
+  transform: translateY(-1px);
+}
+
+/* NO TOOLS */
+.no-tools,
+.no-results {
+  text-align: center;
+  color: var(--enchanted-card-fg);
+  font-size: 1.1rem;
+  margin-top: 3rem;
+  padding: 3rem;
+  background: var(--enchanted-card);
+  border-radius: 12px;
+  border: 1.5px solid var(--enchanted-card-border);
+}
+
+/* === ACADEMIC LIBRARY === */
+.academic-library {
+  padding: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: var(--night-sky);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px var(--night-sky);
+}
+
+.library-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.library-header h2 {
+  color: var(--hogwarts-gold);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.library-header p {
+  color: var(--hogwarts-gold-light);
+  font-size: 1.1rem;
+}
+
+.library-controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  flex: 1;
+  min-width: 300px;
+}
+
+.category-filter {
+  min-width: 200px;
+}
+
+.category-select {
+  width: 100%;
+  padding: 1.2rem;
+  border: 1px solid var(--enchanted-card-border);
+  border-radius: 10px;
+  background: var(--enchanted-card);
+  color: var(--enchanted-card-fg);
+  font-size: 1rem;
+}
+
+.category-select option {
+  background: var(--enchanted-card);
+  color: var(--enchanted-card-fg);
+}
+
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--hogwarts-gold-card-fg);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--muted-main);
+  border-top: 4px solid var(--hogwarts-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.resources-section {
+  margin-top: 2rem;
+}
+
+.resources-stats {
+  margin-bottom: 1rem;
+  color: var(--hogwarts-gold-light);
+  font-size: 0.9rem;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2rem;
+}
+
+.resource-card {
+  background: var(--enchanted-card);
+  border: 1px solid var(--enchanted-card-border);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px var(--night-sky);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px var(--hogwarts-gold-glow);
+  border-color: var(--hogwarts-gold);
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resource-icon {
+  font-size: 2rem;
+}
+
+.resource-type-badge {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.resource-content {
+  flex: 1;
+}
+
+.resource-title {
+  color: var(--hogwarts-gold-card-fg);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.resource-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.resource-subject {
+  color: var(--hogwarts-gold);
+  font-weight: 600;
+}
+
+.resource-size,
+.resource-date {
+  color: var(--hogwarts-gold-light);
+}
+
+.resource-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.preview-btn,
+.download-btn {
+  flex: 1;
+  padding: 1rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.preview-btn {
+  background: var(--mystical-purple);
+  color: var(--mystical-purple-fg);
+}
+
+.preview-btn:hover {
+  background: hsl(270, 60%, 55%);
+  transform: translateY(-2px);
+}
+
+.download-btn {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+}
+
+.download-btn:hover {
+  background: var(--hogwarts-gold-glow);
+  transform: translateY(-2px);
+}
+
+.no-resources {
+  text-align: center;
+  padding: 3rem;
+  color: var(--hogwarts-gold-card-fg);
+  background: var(--enchanted-card);
+  border-radius: 15px;
+  box-shadow: 0 4px 16px var(--night-sky);
+}
+
+.no-resources-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.no-resources h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--hogwarts-gold-card-fg);
+}
+
+.no-resources p {
+  color: var(--hogwarts-gold-light);
+}
+
+/* === CGPA CALCULATOR === */
+.cgpa-calculator {
+  background: var(--enchanted-card);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px var(--night-sky);
+  border: 1px solid var(--enchanted-card-border);
+}
+
+.cgpa-calculator h2 {
+  color: var(--hogwarts-gold);
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 8px var(--night-sky);
+}
+
+.current-semester {
+  background: var(--night-sky);
+  border-radius: 15px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  border: 1px solid var(--enchanted-card-border);
+}
+
+.current-semester h3 {
+  color: var(--hogwarts-gold-card-fg);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.subjects-container {
+  margin-bottom: 2.5rem;
+}
+
+.subject-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr 0.5fr;
+  gap: 1.5rem;
+  padding: 1.2rem;
+  background: var(--enchanted-card-border);
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: var(--hogwarts-gold-card-fg);
+  text-align: center;
+}
+
+.subject-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr 0.5fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  padding: 1.2rem;
+  background: var(--night-sky);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--enchanted-card-border);
+}
+
+.subject-row:hover {
+  background: var(--enchanted-card);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--night-sky);
+}
+
+.subject-row input,
+.subject-row select {
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--enchanted-card-border);
+  border-radius: 10px;
+  background: var(--enchanted-card-fg-strong);
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  outline: none;
+  color: var(--mystical-purple);
+}
+
+.subject-row input:focus,
+.subject-row select:focus {
+  border-color: var(--hogwarts-gold);
+  box-shadow: 0 0 0 3px var(--hogwarts-gold-glow);
+  transform: scale(1.02);
+}
+
+.subject-row select {
+  cursor: pointer;
+}
+
+.grade-points {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px var(--hogwarts-gold-glow);
+}
+
+.remove-btn {
+  background: #dc2626;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  position: relative;
+  font-weight: 900;
+}
+
+.remove-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.15) rotate(90deg);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5),
+              0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+.remove-btn::before {
+  content: "×";
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* Style for the custom SVG cross icon (fallback) */
+.cross-icon {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Make sure the Action column is properly sized */
+/* Removed duplicate definitions - using the spacious versions above */
+
+/* Mobile responsive adjustments for the remove button */
+@media (max-width: 768px) {
+  .subject-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .remove-btn {
+    width: 44px;
+    height: 44px;
+    align-self: center;
+    margin-top: 0.5rem;
+  }
+}
+
+/* === Responsive Design === */
+@media (max-width: 1200px) {
+  .tools-cards-grid,
+  .tools-grid,
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .tools-cards-grid,
+  .tools-grid,
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .suite-title {
+    font-size: 2rem;
+  }
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .suite-content {
+    padding: 1rem;
+  }
+  .cgpa-calculator {
+    padding: 1.5rem;
+  }
+  .cgpa-calculator h2 {
+    font-size: 2rem;
+  }
+  .subject-header,
+  .subject-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    text-align: left;
+  }
+  .subject-header {
+    display: none;
+  }
+  .subject-row {
+    padding: 1rem;
+  }
+  .subject-row > * {
+    margin-bottom: 0.5rem;
+  }
+  .subject-row input,
+  .subject-row select {
+    width: 100%;
+  }
+  .calculator-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .calculator-actions button {
+    width: 100%;
+    max-width: 300px;
+  }
+  .results-display {
+    grid-template-columns: 1fr;
+  }
+  .modal-content {
+    width: 95%;
+    margin: 1rem;
+  }
+  .modal-header {
+    padding: 1.5rem;
+  }
+  .modal-body {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .tools-header h2 {
+    font-size: 1.3rem;
+  }
+  .tool-card {
+    padding: 0.8rem;
+    min-height: 120px;
+  }
+  .tool-name {
+    font-size: 1rem;
+  }
+  .tool-desc {
+    font-size: 0.85rem;
+  }
+  .search-input {
+    width: 100%;
+    max-width: 300px;
+  }
+  .category-filter {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* === CGPA CALCULATOR MODAL POPUP === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(8, 10, 15, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--enchanted-card);
+  border: 2px solid var(--enchanted-card-border);
+  border-radius: 24px;
+  width: 95%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 
+              0 0 0 1px var(--hogwarts-gold-glow);
+  animation: slideUp 0.4s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* MODAL HEADER */
+.modal-header {
+  background: linear-gradient(135deg, var(--hogwarts-gold), var(--mystical-purple));
+  padding: 2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--enchanted-card-border);
+  position: relative;
+}
+
+.modal-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.1), 
+    rgba(138, 43, 226, 0.1));
+  pointer-events: none;
+}
+
+.modal-header h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--hogwarts-gold-foreground);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 1;
+  position: relative;
+}
+
+.modal-header h3::before {
+  content: "🎯";
+  font-size: 1.8rem;
+}
+
+/* CLEAN WHITE GLOWING CROSS BUTTON */
+.close-modal-btn {
+  background: #dc2626;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4),
+              0 0 0 0 rgba(255, 255, 255, 0.6);
+  z-index: 2;
+  position: relative;
+}
+
+.close-modal-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 6px 24px rgba(220, 38, 38, 0.6),
+              0 0 16px rgba(255, 255, 255, 0.8);
+}
+
+.close-modal-btn::before {
+  content: "×";
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* MODAL BODY */
+.modal-body {
+  padding: 2.5rem;
+  overflow-y: auto;
+  max-height: calc(85vh - 140px);
+  background: var(--night-sky);
+}
+
+/* SEMESTER SUMMARY CARDS */
+.semester-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-item {
+  background: linear-gradient(135deg, var(--hogwarts-gold), var(--mystical-purple));
+  color: var(--hogwarts-gold-foreground);
+  padding: 2rem 1.5rem;
+  border-radius: 18px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3),
+              0 0 20px var(--hogwarts-gold-glow);
+}
+
+.summary-item .label {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.summary-item .value {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* SUBJECTS TABLE */
+.modal-body h4 {
+  color: var(--hogwarts-gold);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.modal-body h4::before {
+  content: "📚";
+  font-size: 1.3rem;
+}
+
+.subjects-list {
+  background: var(--enchanted-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--enchanted-card-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.subjects-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.subjects-list th {
+  background: linear-gradient(135deg, var(--house-blue), var(--mystical-purple));
+  color: var(--house-blue-fg);
+  padding: 1.2rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--enchanted-card-border);
+}
+
+.subjects-list td {
+  color: var(--enchanted-card-fg);
+  padding: 1rem;
+  border-bottom: 1px solid var(--enchanted-card-border);
+  font-weight: 500;
+}
+
+.subjects-list tr:last-child td {
+  border-bottom: none;
+}
+
+.subjects-list tr:hover {
+  background: var(--night-sky);
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+/* CLEAN REMOVE BUTTON FOR SUBJECTS */
+.remove-btn {
+  background: #dc2626;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  position: relative;
+}
+
+.remove-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.15) rotate(90deg);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5),
+              0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+.remove-btn::before {
+  content: "×";
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 98%;
+    max-height: 92vh;
+    border-radius: 16px;
+  }
+  
+  .modal-header {
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .modal-header h3 {
+    font-size: 1.5rem;
+  }
+  
+  .close-modal-btn {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .modal-body {
+    padding: 1.5rem;
+  }
+  
+  .semester-summary {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .summary-item {
+    padding: 1.5rem 1rem;
+  }
+  
+  .summary-item .value {
+    font-size: 1.8rem;
+  }
+  
+  .subjects-list {
+    font-size: 0.9rem;
+  }
+  
+  .subjects-list th,
+  .subjects-list td {
+    padding: 0.8rem 0.5rem;
+  }
+  
+  .remove-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .summary-item .value {
+    font-size: 1.6rem;
+  }
+  
+  .subjects-list th,
+  .subjects-list td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* === Calculator Action Buttons === */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.add-subject-btn,
+.add-semester-btn,
+.save-edit-btn,
+.cancel-edit-btn {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--hogwarts-gold-glow);
+}
+
+.add-subject-btn:hover,
+.add-semester-btn:hover,
+.save-edit-btn:hover {
+  background: var(--hogwarts-gold-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--hogwarts-gold-glow);
+}
+
+.cancel-edit-btn {
+  background: var(--muted-main);
+  color: var(--muted-fg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-edit-btn:hover {
+  background: var(--destructive-main);
+  color: var(--destructive-fg);
+}
+
+.add-subject-btn:disabled,
+.add-semester-btn:disabled,
+.save-edit-btn:disabled {
+  background: var(--muted-main);
+  color: var(--muted-fg);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* === Current SGPA Display === */
+.current-sgpa {
+  background: var(--enchanted-card);
+  border: 2px solid var(--hogwarts-gold);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  box-shadow: 0 8px 32px var(--hogwarts-gold-glow);
+}
+
+.current-sgpa h4 {
+  color: var(--hogwarts-gold);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sgpa-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--hogwarts-gold-card-fg-strong);
+  text-shadow: 0 2px 8px var(--night-sky);
+}
+
+.current-sgpa p {
+  color: var(--hogwarts-gold-light);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* === Semester Results === */
+.semester-results {
+  margin-top: 3rem;
+  background: var(--enchanted-card);
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid var(--enchanted-card-border);
+}
+
+.semester-results h3 {
+  color: var(--hogwarts-gold);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.results-table {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.results-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--night-sky);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.results-table th {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+}
+
+.results-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--enchanted-card-border);
+  color: var(--enchanted-card-fg);
+}
+
+.results-table tr:hover {
+  background: var(--enchanted-card);
+}
+
+.performance {
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.performance.excellent {
+  background: #10b981;
+  color: white;
+}
+
+.performance.good {
+  background: #3b82f6;
+  color: white;
+}
+
+.performance.average {
+  background: #f59e0b;
+  color: white;
+}
+
+.performance.below-average {
+  background: #ef4444;
+  color: white;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-btn,
+.edit-btn,
+.delete-semester-btn {
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1.2rem;
+}
+
+.view-btn:hover {
+  background: var(--mystical-purple);
+}
+
+.edit-btn:hover {
+  background: var(--hogwarts-gold);
+}
+
+.delete-semester-btn:hover {
+  background: var(--destructive-main);
+}
+
+/* === Overall CGPA Result === */
+.cgpa-result {
+  background: linear-gradient(135deg, var(--hogwarts-gold), var(--mystical-purple));
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.cgpa-result h2 {
+  font-size: 2.5rem;
+  color: var(--hogwarts-gold-foreground);
+  margin-bottom: 1rem;
+}
+
+.cgpa-score {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.cgpa-details {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cgpa-details p {
+  color: var(--hogwarts-gold-foreground);
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.overall-performance {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === Subject Item for Modal === */
+.subject-item {
+  background: var(--night-sky);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--enchanted-card-border);
+}
+
+.subject-name {
+  color: var(--hogwarts-gold-card-fg);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.subject-details {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.subject-details span {
+  color: var(--hogwarts-gold-light);
+  font-size: 0.9rem;
+  background: var(--enchanted-card);
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+}
+
+/* === Tools Stats === */
+.tools-stats {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  color: var(--hogwarts-gold-light);
+  font-size: 0.9rem;
+}
+
+/* === Quick Shortcuts === */
+.quick-shortcuts {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: var(--enchanted-card);
+  border-radius: 20px;
+  border: 1px solid var(--enchanted-card-border);
+}
+
+.quick-shortcuts h3 {
+  color: var(--hogwarts-gold);
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.shortcut-card {
+  background: var(--night-sky);
+  border: 2px solid var(--enchanted-card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.shortcut-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--hogwarts-gold);
+  box-shadow: 0 8px 32px var(--hogwarts-gold-glow);
+}
+
+.shortcut-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--enchanted-card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--enchanted-card-border);
+  position: relative;
+}
+
+.shortcut-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.shortcut-fallback {
+  color: var(--hogwarts-gold);
+  font-weight: 900;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.shortcut-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.shortcut-info h4 {
+  color: var(--hogwarts-gold-card-fg);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.shortcut-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  align-self: flex-start;
+  border: 1px solid transparent;
+}
+
+.shortcut-badge.networking {
+  background: var(--mystical-purple);
+  color: var(--mystical-purple-fg);
+  border-color: var(--mystical-purple);
+}
+
+.shortcut-badge.development {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.shortcut-badge.design {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.shortcut-badge.productivity {
+  background: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
+}
+
+/* Responsive for shortcuts */
+@media (max-width: 768px) {
+  .shortcuts-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .shortcut-card {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .shortcut-logo {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .shortcut-fallback {
+    font-size: 1.4rem;
+  }
+  
+  .shortcut-info h4 {
+    font-size: 1.1rem;
+  }
+  
+  .shortcut-badge {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
