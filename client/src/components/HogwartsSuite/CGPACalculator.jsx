@@ -9,6 +9,9 @@ const CGPACalculator = () => {
   const [overallCGPA, setOverallCGPA] = useState(0);
   const [editingSemester, setEditingSemester] = useState(null);
   const [viewingSemester, setViewingSemester] = useState(null);
+  const [targetCGPA, setTargetCGPA] = useState('');
+  const [targetSemesters, setTargetSemesters] = useState('');
+  const [showTargetCalculator, setShowTargetCalculator] = useState(false);
 
   const addSubject = () => {
     setSubjects([...subjects, { name: '', credits: '', grade: '' }]);
@@ -150,6 +153,44 @@ const CGPACalculator = () => {
   // Close view modal
   const closeViewModal = () => {
     setViewingSemester(null);
+  };
+
+  // Calculate required SGPA to achieve target CGPA
+  const calculateRequiredSGPA = () => {
+    if (!targetCGPA || !targetSemesters || semesterResults.length === 0) {
+      return null;
+    }
+
+    const target = parseFloat(targetCGPA);
+    const futureSemesters = parseInt(targetSemesters);
+    
+    if (target < 0 || target > 10 || futureSemesters <= 0) {
+      return null;
+    }
+
+    // Current total credits and grade points
+    const currentTotalCredits = semesterResults.reduce((sum, s) => sum + s.credits, 0);
+    const currentTotalGradePoints = semesterResults.reduce((sum, s) => sum + (s.sgpa * s.credits), 0);
+
+    // Assume average credits per semester (you can make this configurable)
+    const avgCreditsPerSemester = currentTotalCredits / semesterResults.length;
+    const futureCredits = futureSemesters * avgCreditsPerSemester;
+
+    // Calculate required grade points for future semesters
+    const totalCreditsAfterTarget = currentTotalCredits + futureCredits;
+    const requiredTotalGradePoints = target * totalCreditsAfterTarget;
+    const requiredFutureGradePoints = requiredTotalGradePoints - currentTotalGradePoints;
+    
+    // Required SGPA for future semesters
+    const requiredSGPA = futureCredits > 0 ? requiredFutureGradePoints / futureCredits : 0;
+
+    return {
+      requiredSGPA: Math.max(0, Math.min(10, requiredSGPA)),
+      isAchievable: requiredSGPA >= 0 && requiredSGPA <= 10,
+      currentCredits: currentTotalCredits,
+      futureCredits: futureCredits,
+      avgCreditsPerSemester: avgCreditsPerSemester
+    };
   };
 
   const currentSGPA = calculateCurrentSGPA();
@@ -337,6 +378,110 @@ const CGPACalculator = () => {
                 Performance: {getPerformanceLabel(overallCGPA)}
               </p>
             </div>
+          </div>
+
+          {/* Target CGPA Calculator */}
+          <div className="target-cgpa-section">
+            <div className="target-header">
+              <h3>🎯 Target CGPA Calculator</h3>
+              <button 
+                onClick={() => setShowTargetCalculator(!showTargetCalculator)}
+                className="toggle-target-btn"
+              >
+                {showTargetCalculator ? '🔼 Hide' : '🔽 Show'}
+              </button>
+            </div>
+            
+            {showTargetCalculator && (
+              <div className="target-calculator">
+                <div className="target-inputs">
+                  <div className="input-group">
+                    <label>Target CGPA:</label>
+                    <input
+                      type="number"
+                      placeholder="e.g., 8.5"
+                      min="0"
+                      max="10"
+                      step="0.1"
+                      value={targetCGPA}
+                      onChange={(e) => setTargetCGPA(e.target.value)}
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label>Remaining Semesters:</label>
+                    <input
+                      type="number"
+                      placeholder="e.g., 4"
+                      min="1"
+                      max="20"
+                      value={targetSemesters}
+                      onChange={(e) => setTargetSemesters(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                {(() => {
+                  const calculation = calculateRequiredSGPA();
+                  if (!calculation) {
+                    return (
+                      <div className="target-result">
+                        <p>💡 Enter your target CGPA and remaining semesters to see required SGPA</p>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div className="target-result">
+                      <div className="calculation-summary">
+                        <h4>📊 Target Analysis</h4>
+                        <div className="result-grid">
+                          <div className="result-item">
+                            <span className="label">Required SGPA:</span>
+                            <span className={`value ${calculation.isAchievable ? 'achievable' : 'difficult'}`}>
+                              {calculation.requiredSGPA.toFixed(3)}
+                            </span>
+                          </div>
+                          <div className="result-item">
+                            <span className="label">Feasibility:</span>
+                            <span className={`value ${calculation.isAchievable ? 'achievable' : 'difficult'}`}>
+                              {calculation.isAchievable ? '✅ Achievable' : '⚠️ Very Challenging'}
+                            </span>
+                          </div>
+                          <div className="result-item">
+                            <span className="label">Current Credits:</span>
+                            <span className="value">{calculation.currentCredits}</span>
+                          </div>
+                          <div className="result-item">
+                            <span className="label">Future Credits:</span>
+                            <span className="value">{calculation.futureCredits.toFixed(0)}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="target-advice">
+                          {calculation.isAchievable ? (
+                            calculation.requiredSGPA >= 9.0 ? (
+                              <p className="advice excellent">🌟 You need outstanding performance! Aim for O and A+ grades consistently.</p>
+                            ) : calculation.requiredSGPA >= 8.0 ? (
+                              <p className="advice good">👍 You need good performance! Focus on A and A+ grades.</p>
+                            ) : calculation.requiredSGPA >= 7.0 ? (
+                              <p className="advice average">📚 Maintain steady performance with B+ and A grades.</p>
+                            ) : (
+                              <p className="advice manageable">😊 Your target is manageable with consistent effort!</p>
+                            )
+                          ) : (
+                            calculation.requiredSGPA > 10 ? (
+                              <p className="advice impossible">🚫 This target requires SGPA above 10.0, which is impossible. Consider adjusting your target or extending the timeline.</p>
+                            ) : (
+                              <p className="advice difficult">⚠️ This target is very challenging. Consider extending your timeline or setting a more realistic target.</p>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
           </div>
         </div>
       )}

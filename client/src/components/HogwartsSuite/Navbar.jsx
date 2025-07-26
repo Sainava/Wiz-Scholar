@@ -20,7 +20,7 @@ const HogwartsSuiteNavbar = ({ activeSection, setActiveSection }) => {
               className={`nav-link ${activeSection === 'tools' ? 'active' : ''}`}
               onClick={() => setActiveSection('tools')}
             >
-              🛠️ Tools Library
+              🛠️ Tools
             </button>
           </li>
           <li>

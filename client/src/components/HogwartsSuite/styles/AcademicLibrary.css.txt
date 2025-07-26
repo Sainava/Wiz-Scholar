@@ -1,0 +1,240 @@
+/* === Academic Library Styling === */
+.academic-library {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--night-sky);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px var(--night-sky);
+}
+
+.library-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.library-header h2 {
+  color: var(--hogwarts-gold);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px var(--night-sky);
+}
+
+.library-header p {
+  color: var(--hogwarts-gold-light);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.library-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+/* Course Grid Layout */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.course-card {
+  background: var(--enchanted-card);
+  border: 1px solid var(--enchanted-card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: var(--hogwarts-gold);
+}
+
+.course-thumbnail {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+
+.course-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.course-card:hover .course-thumbnail img {
+  transform: scale(1.05);
+}
+
+.course-duration {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: var(--night-sky);
+  color: var(--hogwarts-gold);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.course-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.course-title {
+  color: var(--hogwarts-gold);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.course-description {
+  color: var(--hogwarts-gold-card-fg);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+}
+
+.course-channel {
+  color: var(--hogwarts-gold-light);
+  font-weight: 600;
+}
+
+.course-level {
+  color: var(--mystical-purple-fg);
+  background-color: var(--mystical-purple);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.watch-btn {
+  display: inline-block;
+  background-color: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  text-align: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.watch-btn:hover {
+  background-color: var(--hogwarts-gold-glow);
+  box-shadow: 0 0 10px var(--hogwarts-gold-glow);
+}
+
+/* Category tabs styling */
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding: 1rem 0;
+}
+
+.category-tab {
+  background: var(--enchanted-card);
+  border: 2px solid var(--enchanted-card-border);
+  color: var(--enchanted-card-fg);
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.category-tab:hover,
+.category-tab.active {
+  background: var(--hogwarts-gold);
+  color: var(--hogwarts-gold-foreground);
+  border-color: var(--hogwarts-gold);
+  box-shadow: 0 2px 8px var(--hogwarts-gold-glow);
+}
+
+/* No results message */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--muted-fg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .courses-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .category-tabs {
+    padding: 0.5rem;
+  }
+  
+  .category-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .library-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .library-header p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .category-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .category-tab {
+    white-space: nowrap;
+  }
+}
