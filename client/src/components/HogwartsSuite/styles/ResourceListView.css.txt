@@ -1,0 +1,98 @@
+/* List view styling for resources */
+.resources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.resource-list-item {
+  background: var(--enchanted-card);
+  border: 1px solid var(--enchanted-card-border);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.resource-list-item:hover {
+  border-color: var(--hogwarts-gold);
+  background: rgba(var(--enchanted-card-rgb), 0.8);
+  transform: translateX(5px);
+}
+
+.resource-list-item .resource-card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 80px;
+}
+
+.resource-list-item .resource-icon-container {
+  width: 40px;
+  height: 40px;
+}
+
+.resource-list-item .resource-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.resource-list-item .resource-title {
+  margin-bottom: 0;
+  font-size: 1rem;
+  flex: 1;
+}
+
+.resource-list-item .resource-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.resource-list-item .resource-details {
+  display: flex;
+  align-items: center;
+  min-width: 180px;
+}
+
+.resource-list-item .resource-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.resource-list-item .preview-btn,
+.resource-list-item .download-btn {
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 992px) {
+  .resource-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .resource-list-item .resource-content {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  
+  .resource-list-item .resource-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  .resource-list-item .resource-actions {
+    width: 100%;
+  }
+}
