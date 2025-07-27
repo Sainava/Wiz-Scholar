@@ -317,40 +317,6 @@ export const houseThemes = {
 };
 ```
 
-#### Context-Aware Theming
-```jsx
-// AuthContext integration with house theming
-const AuthContext = () => {
-    const [userHouse, setUserHouse] = useState(null);
-    
-    // Load user's house from Firebase
-    useEffect(() => {
-        if (user) {
-            const userDoc = await getDoc(doc(db, 'users', user.uid));
-            if (userDoc.exists()) {
-                setUserHouse(userDoc.data().house);
-            }
-        }
-    }, [user]);
-
-    // Apply house-specific theming throughout app
-    const currentTheme = getHouseTheme(userHouse);
-    
-    return (
-        <AuthContext.Provider value={{
-            user, userHouse, currentTheme,
-            handleCompleteSorting: (house) => {
-                setUserHouse(house);
-                // Save to Firebase
-                updateDoc(doc(db, 'users', user.uid), { house });
-            }
-        }}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
-```
-
 ### Features Dashboard
 ```jsx
 const FeaturesSection = () => {
