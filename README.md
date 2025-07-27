@@ -404,7 +404,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 # AI Server Configuration
 AI_SERVER_URL=http://localhost:8001
-OPENAI_API_KEY=your_openai_key
+GEMINI_API_KEY=your_gemini_key
 ```
 
 ### Build & Deployment Process
