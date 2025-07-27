@@ -80,7 +80,7 @@ graph TB
     B --> D[MongoDB Atlas]
     B --> E[Cloudinary CDN]
     C --> F[ML Models]
-    C --> G[OpenAI API]
+    C --> G[Gemini API]
     A --> H[Firebase Auth]
 ```
 
