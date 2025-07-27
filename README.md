@@ -148,7 +148,7 @@ house_profiles = {
 ```
 
 #### Question Bank System
-- **Total Questions**: 50+ carefully crafted questions
+- **Total Questions**: 15 carefully crafted questions
 - **Question Types**: Scenario-based, preference-based, ethical dilemmas
 - **Scoring System**: Multi-dimensional trait scoring
 - **Adaptive Logic**: Questions selected based on previous responses
